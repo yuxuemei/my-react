@@ -1,0 +1,364 @@
+.App {
+  width: 7.5rem;
+  margin: 0 auto;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.bottom-nav{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  height: 60px;
+  line-height: 60px;
+  background-color: #fff;
+}
+.bottom-nav .on{
+  color: #8f66da;
+}
+.bottom-nav li{
+  flex: 1;
+}
+.bottom-nav a{
+  color: #000;
+}
+html,body,p,ul,li{
+  margin:0;
+  padding:0;
+}
+html,body{
+  -ms-touch-action: none;
+  -webkit-user-drag: none;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+a{
+  text-decoration: none;
+}
+div,span{
+  font-size: .24rem;
+  color: #2a2131;
+}
+html,body{
+  height:100%;
+  background:#f4f4f4;
+}
+.clearfix:after{
+    display:block;
+    clear:both;
+    content:"";
+    visibility:hidden;
+    height:0
+}
+.clearfix{zoom:1}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.relative{
+  position: relative;
+}
+.absolute{
+  position: absolute;
+}
+.fixed{
+  position: fixed;
+}
+.flex{
+  display: flex;
+}
+.center{
+  text-align: center;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+
+.psw-right input{
+  width:100%;
+  line-height: .8rem;
+  height: .8rem;
+  border:none;
+}
+.mint-toast{
+    background: rgba(0, 0, 0, 0.3)
+}
+.icon-success{
+  background:url('./images/message-error.png') no-repeat center center;
+  width: 2rem;
+  height: 2rem;
+  background-size: 100%;
+  margin: 0 auto;
+}
+.moreDot {
+  text-overflow:ellipsis;
+  word-wrap:normal;
+  white-space:nowrap;
+  overflow:hidden;
+  text-align:left;
+}
+
+/*没有数据样式*/
+.default-text{
+  font-size:.24rem;
+  color:#cccccc;
+}
+.default{
+  padding-top:1.5rem;
+  width:3.3rem;
+  margin:0 auto;
+}
+.default img{
+  width:100%;
+  height:100%;
+}
+/*下拉加载的公共样式*/
+.mint-loadmore-top, .mint-loadmore-bottom{
+  font-size: .22rem;
+}
+.loading-gif{
+  width: .32rem;
+  height: .32rem;
+}
+.mint-loadmore{
+  overflow: auto;
+}
+/*顶部菜单nav*/
+.nav{
+  white-space:nowrap;
+  background-color:#fff;
+  height:.8rem;
+  line-height: .25rem;
+  top:0;
+  left:50%;
+  z-index:999;
+  border-bottom:.01rem solid #e4e4e4;
+  width: 7.5rem;
+  margin-left: -3.75rem;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.nav>div{
+  display:inline-block;
+  padding:0 .25rem;
+  text-align:center;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  position:relative;
+}
+.nav>div.act{
+  color:#6d66c0;
+}
+.nav-title{
+  display:inline-block;
+  height:.8rem;
+  line-height:.8rem;
+  padding:0 .2rem;
+  font-size: .24rem;
+}
+.nav .border{
+  width:.3rem;
+  border-radius:.16rem;
+  height:.08rem;
+  background-color:#6d66c0;
+  margin:0 auto;
+  top:.69rem;
+  left:50%;
+  margin-left:-.15rem;
+}
+.image-ticket{
+  width: .25rem;
+  height: .18rem;
+}
+.image-crystal{
+    width: .2rem;
+    height: .18rem;
+}
+.image-diamond {
+  width:.19rem;
+  height:.23rem;
+}
+.mint-spinner-fading-circle{
+  margin: 0 auto;
+}
+.group .bottom .time {
+  font-size:.2rem;
+  color:#9092b8;
+  margin-left:.36rem;
+}
+
+/*---------弹框公共部分css-----------*/
+.popup{
+  -webkit-transition:all 2s;
+  transition:all 2s;
+  z-index: 999;
+}
+.popup .bg{
+  background:rgba(0, 0, 0, 0.5);
+  width:100%;
+  height:100%;
+}
+.z-fixed{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height: 100%;
+}
+.bomb-box{
+  width:5.54rem;
+  height:6rem;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-2.77rem;
+  margin-top:-4.5rem;
+}
+.img-close{
+  width:.54rem;
+  height:.54rem;
+  float: right;
+}
+.bomb-box .line{
+  height:.32rem;
+  width:.02rem;
+  float:right;
+  background-color:#fff;
+  margin-right:.3rem;
+}
+.bomb-box .box{
+  background-color:#fff;
+  border-radius:.2rem;
+  padding:.5rem .26rem;
+  margin-top:.33rem;
+}
+.mint-toast-text{
+  color: #fff;
+}
+/*---------弹框公共部分css-----------*/
+
+/*----------下注弹框css---------------*/
+.bet-box .title{
+  color:#2b2031;
+  font-weight:bold;
+  font-size:.26rem;
+}
+.bet-box .proportion{
+  color:#b3251d;
+  font-size:.18rem;
+}
+.bet-box .form{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin-top:.2rem;
+  height:.76rem;
+  line-height:.76rem;
+  margin-bottom:.22rem;
+}
+.bet-box .form .box-inpupt{
+  border:.02rem solid #c4c1c5;
+  border-radius:.1rem;
+  width:3.72rem;
+  background-color:#f4f4f4;
+  height:.7rem;
+  line-height:.7rem;
+  padding-left:.2rem;
+  opacity:1;
+  position:absolute;
+  top:0;
+  z-index:10001;
+}
+.bet-box .form .all{
+  background-color:#5d5562;
+  width:.88rem;
+  color:#fff;
+  border-radius:.1rem;
+  margin-left:4.16rem;
+}
+.bet-box .data{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
+}
+.bet-box .data span{
+  display: inline-block;
+  height:.58rem;
+  line-height:.58rem;
+  margin-right:.2rem;
+  border-radius:.04rem;
+  border:.02rem solid #5d5562;
+  font-size:.26rem;
+  font-weight:bold;
+  width:1.1rem;
+  text-align: center;
+}
+.bet-box .data span.selected {
+  color:#fff;
+  background-color:#5d5562;
+}
+.bet-box .surplus{
+  margin-top:.3rem;
+  margin-bottom:.3rem;
+}
+.bet-box .surplus span{
+  font-size:.2rem;
+  color:#2b2031;
+}
+.bet-box .btn{
+  height:.76rem;
+  line-height:.76rem;
+  font-weight:bold;
+  background-color:#da5c34;
+  border-radius:.1rem;
+  text-align:center;
+}
+.bet-box .btn span{
+  color:#fff;
+  font-size:.22rem;
+}
+/*----------下注弹框css---------------*/
+
+/*----------底部选择弹出框css---------------*/
+.bottom-box{
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:#ffffff;
+}
+.bottom-box .item{
+  height:1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  border-bottom: .01rem solid #ececec;
+}
+/*----------底部选择弹出框css---------------*/
