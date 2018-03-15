@@ -5,7 +5,8 @@ const initialState = {
 	planlist:db,
     user:{
 
-    }
+    },
+    loading:false,
 }
 
 const PlanReducer = function(state = initialState,action){
@@ -23,6 +24,8 @@ const PlanReducer = function(state = initialState,action){
             return Object.assign({},state,{show:action.show});
         case types.USER: 
             return Object.assign({},state,{user:action.user});
+        case types.LOADING: 
+            return Object.assign({},state,{loading:action.loading});
     }
     return state;
 }

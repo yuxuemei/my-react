@@ -1,8 +1,9 @@
 import React,{ Component } from 'react'
 import { connect } from 'react-redux';
+import store from './../redux/store.js';
 
 //引入定义的action
-import { user } from '../actions/plan.js'
+import {loading } from '../actions/plan.js'
 
 import './home.css';
 
@@ -44,6 +45,7 @@ class Home extends Component {
 	    this.banner();
 	    this.getMateNumber();
 	    this.getGameClassify();
+	    store.dispatch(loading(!this.props.data.loading));
 	}
 	banner(){
 		var res = Common.get({
@@ -70,6 +72,7 @@ class Home extends Component {
             this.setState({
 				gameClassify:respose
 			})
+			store.dispatch(loading(!this.props.data.loading));
         })
     }
     getChildClassify(){

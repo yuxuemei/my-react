@@ -22,6 +22,8 @@ class Plan extends Component {
     detail (id) {
         this.props.history.push(`/detail/${id}`);
     }
+    componentDidMount(){
+    }
 	render(){
 		return (
 			<div>

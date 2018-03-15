@@ -1,6 +1,7 @@
 //import 'es6-promise'
 import axios from 'axios'
 import store from './redux/store.js';
+import React,{ Component } from 'react'
 
 //引入定义的action
 import { user } from './actions/plan.js'

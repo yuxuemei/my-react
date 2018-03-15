@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Router,Route,Link } from 'react-router-dom'
 //import logo from './logo.svg';
 //import Child from './child';
 //import ToggleButton  from './toggleButton';
 //import Boo  from './boo';
 //import Foo  from './foo';
 // 引入公共js 
-//import Common from './common.js';
+import Common from './common.js';
+
 //引入store
 import { Provider, connect } from 'react-redux';
 import store from './redux/store.js'
@@ -14,18 +16,16 @@ import store from './redux/store.js'
 import './App.css'
 import './components/component.css'
 
-import { Router,Route,Link } from 'react-router-dom'
-// 引入 homejs
-import Home from './components/home.js'
-
-// 引入4个模块组件
-import Plan from './components/plan.js'
+// 引入模块页面
+import Home from './page/home.js'
+import Plan from './page/plan.js'
+import Detail from './page/detail.js'
+import Login from './page/login.js'
+import Recharge from './page/recharge.js'
+// 引入组件
+import Loading from './components/loading.js'
 import Popup from './components/popup.js'
 import TestRouter from './components/testrouter.js'
-import Detail from './components/detail.js'
-import Login from './components/login.js'
-import Recharge from './components/recharge.js'
-
 //引入路由
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory();
@@ -132,11 +132,11 @@ class App extends Component {
           <div> 
           <Router history = {history} >
              <div className="contentBox">
-                <ul className="bottom-nav" onClick={this.updateHandle} style={url==='/' || url==='/plan' || url==='/test'?{}:{display:'none'}}>
-                  <li><Link to="/" className={url === '/' ? 'on' : ''}>首页</Link></li>
-                  <li><Link to="/plan" className={url === '/plan' ? 'on' : ''}>计划表</Link></li>
-                  <li><Link to="/test" className={url === '/test' ? 'on' : ''}>二级路由</Link></li>
-                </ul>
+                <div className="bottom-nav" onClick={this.updateHandle} style={url==='/' || url==='/plan' || url==='/test'?{}:{display:'none'}}>
+                  <Link to="/" className={url === '/' ? 'on' : ''}>首页</Link>
+                  <Link to="/plan" className={url === '/plan' ? 'on' : ''}>计划表</Link>
+                  <Link to="/test" className={url === '/test' ? 'on' : ''}>二级路由</Link>
+                </div>
                 <div className="content"> 
                   <Route exact path="/" component={Home}/>
                   <Route path="/plan" component={Plan}/>
@@ -149,6 +149,7 @@ class App extends Component {
           </Router>
           </div>
           <Popup />
+          <Loading />
         </div>
       </Provider>
     );

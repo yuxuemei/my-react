@@ -27,3 +27,11 @@ export function user(user){
         user
 	}
 }
+
+//显示隐藏loading
+export function loading(loading){
+	return {
+        type:types.LOADING,
+        loading
+	}
+}
