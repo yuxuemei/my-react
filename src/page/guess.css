@@ -1,0 +1,173 @@
+.guessList{
+  padding-top: .8rem;
+  padding-bottom:1rem;
+}
+.big-item{
+	display: flex;
+	background-color: #fff;
+	border-bottom: .02rem solid #f6f6f6;
+	justify-content: space-between;
+  padding: .3rem .86rem;
+}	
+.guess-time{
+	height: .62rem;
+	line-height: .62rem;
+	width: 100%;
+  font-size: .2rem;
+  color: #9092b8;
+}	
+.player_logo{
+	width: .96rem;
+  height: .96rem;
+}
+.player_name{
+  font-weight: bold;
+  color: #2b2031;
+  margin-top: .16rem;
+}
+.big-item .info{
+  width: 3rem;
+  margin-top: .18rem;
+}
+.big-item .result-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.big-item .info .title{
+  font-size: .22rem;
+  color: #2b2031;
+  word-break:break-all;
+}
+.big-item .info .status{
+  font-size: .22rem;
+  height: .34rem;
+  line-height:.34rem;
+  width: 1.18rem;
+  display: inline-block;
+  margin:.12rem auto;
+  border-radius:.34rem;
+  padding:.02rem 0;
+}
+.big-item .info .result{
+  font-size: .36rem;
+  font-weight: bolder;
+  color: #2b2031;
+}
+.big-item .info .time-text{
+  font-size: .2rem;
+  color: #9092b8;
+}
+.status-grey{
+  background-color:#b5b5b5;
+}
+.status-highlight{
+  background-color:#da5c34;
+  color: #fff;
+}
+.icon-time{
+	width:.18rem;
+	height:.18rem;
+	margin-top:.03rem;
+	margin-right:.05rem;
+	vertical-align:-.01rem;
+}
+.icon-time-countdown{
+	width:.18rem;
+	height:.18rem;
+	margin-top:.03rem;
+	margin-right:.05rem;
+  vertical-align: -.01rem;
+}
+.guess-list .item-small>div{
+  padding: .26rem .42rem;
+  border-bottom: .02rem solid #dddddd;
+  position: relative;
+}
+.guess-list .item-small .apply-status{
+   position: absolute;
+   top:0;
+   right: .18rem;
+   width:.58rem;
+   height: .26rem;
+   font-size: .18rem;
+   color: #000;
+   background: #F2C53D;
+   text-align: center;
+   border-radius: 0 0px .05rem .05rem;
+}
+.guess-list .item-small .title{
+  font-weight: bolder;
+  color: #2b2031;
+}
+.guess-list .item-small .big-title{
+  display: flex;
+  justify-content: space-between;
+  height: .4rem;
+  line-height: .4rem;
+  align-items: flex-end;
+}
+.guess-list .item-small .title-bar{
+  background-color: #2b2031;
+  width: .06rem;
+  height: .2rem;
+  display: inline-block;
+  margin-right: .1rem;
+}
+.guess-list .item-small .guess-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap:wrap;
+}
+.item-small .status,.item-small .status1{
+  font-size: .22rem;
+  float: right;
+}
+.item-small .status{
+   color: #b3251d;
+}
+.item-small .status1{
+   color: #9092b8;
+}
+.guess-item-detail,.guess-item-detail-grey{
+  color: #ffffff; 
+  width:3.17rem;
+  border-radius:.1rem;
+  margin-top: .28rem;
+  text-align: center;
+  padding:.12rem 0 ;
+  font-size: .22rem;
+}
+.guess-item-detail{
+  background-color: #5d5562;
+}
+.guess-item-detail-grey{
+  background-color: #c4c1c5;
+}
+.guess-item-detail .team-name,.guess-item-detail-grey .team-name{
+  color: #fff;
+  font-weight: bolder;
+  display: block;
+}
+.guess-item-detail .team-line,.guess-item-detail-grey .team-line{
+  height: .02rem;
+  background-color: #fff;
+  width: 1.4rem;
+  margin: .052rem auto;
+  display: block;
+}
+.guess-item-detail .odds,.guess-item-detail-grey .odds{
+  font-size:.22rem;
+}
+.guess-item-detail .odds{
+    color: #f3c53e;
+}
+.guess-timer span{
+	color: #9092b8;
+	font-size: .22rem;
+}
+.guessList .page-infinite-loading{
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+}

@@ -8,10 +8,7 @@ import {loading } from '../actions/plan.js'
 import './home.css';
 
 import Common from './../common.js'
-import {
-  Route,
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Slider from './../Silder/Slider.js';
 
 class Home extends Component {
@@ -48,7 +45,7 @@ class Home extends Component {
 	    store.dispatch(loading(!this.props.data.loading));
 	}
 	banner(){
-		var res = Common.get({
+		Common.get({
 			url:'/api/banner/list?delivery=11&categoryType=2'
 		}).then(response=>{
 			this.setState({

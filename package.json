@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd-mobile": "^2.1.6",
     "es6-promise": "^4.2.4",
     "events": "^2.0.0",
     "history": "^4.7.2",
@@ -21,6 +22,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "babel-plugin-import": "^1.6.7"
   }
 }

@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import store from '../redux/store.js';
+import { Button } from 'antd-mobile';
 //引入定义的action
 import { show,deletePlan } from '../actions/plan.js'
  
@@ -53,6 +54,7 @@ class Plan extends Component {
                         }
                     </tbody>
                 </table>
+                <Button loading>This is a button</Button>
             </div>
 		)
 	}

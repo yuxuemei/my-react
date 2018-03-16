@@ -15,9 +15,11 @@ import store from './redux/store.js'
 // 引入样式文件
 import './App.css'
 import './components/component.css'
+import 'antd-mobile/dist/antd-mobile.css';
 
 // 引入模块页面
 import Home from './page/home.js'
+import Guess from './page/guess.js'
 import Plan from './page/plan.js'
 import Detail from './page/detail.js'
 import Login from './page/login.js'
@@ -132,13 +134,15 @@ class App extends Component {
           <div> 
           <Router history = {history} >
              <div className="contentBox">
-                <div className="bottom-nav" onClick={this.updateHandle} style={url==='/' || url==='/plan' || url==='/test'?{}:{display:'none'}}>
+                <div className="bottom-nav" onClick={this.updateHandle} style={url==='/' || url==='/plan' || url==='/test' || url==='/guess'?{}:{display:'none'}}>
                   <Link to="/" className={url === '/' ? 'on' : ''}>首页</Link>
+                  <Link to="/guess" className={url === '/guess' ? 'on' : ''}>预测</Link>
                   <Link to="/plan" className={url === '/plan' ? 'on' : ''}>计划表</Link>
                   <Link to="/test" className={url === '/test' ? 'on' : ''}>二级路由</Link>
                 </div>
                 <div className="content"> 
                   <Route exact path="/" component={Home}/>
+                  <Route path="/guess" component={Guess}/>
                   <Route path="/plan" component={Plan}/>
                   <Route path="/test" component={TestRouter}/>
                   <Route path="/detail/:id" component={Detail}/>
