@@ -287,7 +287,7 @@ class Interaction extends Component {
                     <div className="bottom">
                         <div className="time">
                             <img src={require('./../images/time.jpg')} className="image-time"></img>
-                            开赛 {obj.begin_time}
+                            开赛 {Common.formatDate(obj.begin_time,'MM/dd hh:mm')}
                         </div>
                         <div className="people">{ obj.begin_condition>0 ? `(满${obj.begin_condition}人开)` : '(必开)' }</div>
                     </div>
