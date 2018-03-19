@@ -142,6 +142,7 @@ class Guess extends Component {
     render() {
 	    let index = data.length - 1;
 	    const row = (rowData, sectionID, rowID) => {
+	    	console.log(rowData)
 	      if (index < 0) {
 	        index = data.length - 1;
 	      }

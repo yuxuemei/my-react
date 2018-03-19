@@ -211,7 +211,7 @@ html,body{
 .mint-spinner-fading-circle{
   margin: 0 auto;
 }
-.group .bottom .time {
+.am-list-body .bottom .time {
   font-size:.2rem;
   color:#9092b8;
   margin-left:.36rem;

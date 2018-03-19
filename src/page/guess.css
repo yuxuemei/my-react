@@ -2,6 +2,9 @@
   padding-top: .8rem;
   padding-bottom:1rem;
 }
+.guessList .am-list{
+   padding-bottom: 1rem;
+}
 .big-item{
 	display: flex;
 	background-color: #fff;

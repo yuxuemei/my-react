@@ -1,0 +1,126 @@
+.list{
+	padding-top:1.04rem;
+}
+.list .am-list-body{
+	background-color: transparent;
+}
+.list .am-list-body .item{
+	background:#fff;
+	position:relative;
+	margin:0 .24rem .24rem .24rem;
+	border-radius:.1rem;
+	-moz-box-shadow:.02rem .02rem .05rem #ddd;
+	-webkit-box-shadow:.02rem .02rem .05rem #ddd;
+	box-shadow:.02rem .02rem .05rem #ddd;
+	height:auto;
+	width:auto;
+	display:block;
+}
+.am-list-body .item .title_bar{
+	height:.76rem;
+    position:relative;
+}
+.am-list-body .item .image_title_bg{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:.76rem;
+	border-top-left-radius:.1rem;
+	border-top-right-radius:.1rem;
+}
+.am-list-body .item .title_bar_content {
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	display:flex;
+	padding-right:.36rem;
+	padding-left:.16rem;
+	justify-content:space-between;
+	line-height:.76rem;
+}
+.title_bar_content .title {
+	color:#fff;
+	font-size:.26rem;
+	vertical-align:middle;
+	display:flex;
+}
+.list .img_tag {
+	width:1.35rem;
+	height:.52rem;
+	margin-right:.11rem;
+}
+.item .apply{
+	position:absolute;
+	top:0;
+	right:.7rem;
+	min-width:.8rem;
+	height:.35rem;
+	text-align:center;
+	line-height:.35rem;
+	font-size:.2rem;
+	color:#000;
+	background:#F2C53D;
+	padding:0 .1rem;
+	border-radius:0 0px .05rem .05rem;
+}
+.title_bar_content .tag {
+	font-size:.26rem;
+	position:absolute;
+	top:0;
+	color:#fff;
+	left:0;
+	width:1.4rem;
+	text-align:center;
+}
+.title_bar_content .circular {
+	width:.12rem;
+	height:.12rem;
+	border-radius:50%;
+	display:inline-block;
+	background-color:#fff;
+	top: .34rem;
+}
+.title_bar_content .state {
+	color:#fff;
+	left:.18rem;
+	font-size:.2rem;
+	vertical-align:.1rem;
+	width: 1.15rem;
+}
+.am-list-body .item .info {
+	color:#8e94b7;
+	font-size:.22rem;
+	display:flex;
+	margin-top:.39rem;
+	justify-content:space-between;
+}
+.am-list-body .item .info-item {
+	width:1.6rem;
+	text-align:center;
+	border-right:.02rem solid rgba(43,32,49,0.05);
+}
+
+.am-list-body .item .bottom {
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+	margin-top:.36rem;
+	padding-bottom:.21rem;
+	justify-content:space-between;
+}
+.am-list-body .item .bottom .people {
+	font-size:.2rem;
+	color: #000;
+	margin-right:.36rem;
+}
+.image-time{
+	width:.2rem;
+	height:.2rem;
+	margin-top:.03rem;
+	margin-right:.05rem;
+	vertical-align:-.01rem;
+}
+
+

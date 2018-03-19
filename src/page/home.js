@@ -15,19 +15,7 @@ class Home extends Component {
 	constructor(props){
         super(props);
         this.state = {
-        	banner:[{
-					id: 102, 
-					imgpic: "http://oslg9bt6h.bkt.clouddn.com/uploads/images/1516000780129",
-					address:"http://91war.com/news/detail/135",
-					src:"http://oslg9bt6h.bkt.clouddn.com/uploads/images/1516000780129",
-					title:"新手教程"
-				},{
-					id: 94, 
-					imgpic: "http://oslg9bt6h.bkt.clouddn.com/uploads/images/1515743217523",
-					address:"http://91war.com/news/detail/129",
-					src:"http://oslg9bt6h.bkt.clouddn.com/uploads/images/1515743217523",
-					title:"国庆"
-			}],
+        	banner:[],
 			mateNumber:0,
 			gameClassify:[],
 			gameClassifyChild:{}, //首页二级分类和置顶互动赛
@@ -144,12 +132,14 @@ class Home extends Component {
                         {   
                     		gameClassifyChild.gamesType.exist.map((sort,index)=>{
                                 return (
-                                    <Link key={index} className="top-item exist" to="'/interaction?id='+sort.id">
+                                    <Link key={index} className="top-item exist" to={{pathname: `interaction/${sort.id}`}}>
 		                                <div><span className="dot"></span><span>{sort.name}</span></div>
 		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="arrow-03"/></div>
 		                            </Link>
                                 )
-                            }),
+                            })
+                        }
+                        {   
                             gameClassifyChild.gamesType.nonexist.map((sort,index)=>{
                                 return (
                                     <div key={index} className="top-item">

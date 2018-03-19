@@ -1,7 +1,6 @@
 //import 'es6-promise'
 import axios from 'axios'
 import store from './redux/store.js';
-import React,{ Component } from 'react'
 
 //引入定义的action
 import { user } from './actions/plan.js'
@@ -14,6 +13,7 @@ if(localStorage.userinfo){
    store.dispatch(user(JSON.parse(localStorage.userinfo)));
 }
 var Common = {
+    CURRECY:[require('./images/gold.png'),require('./images/diamond.png'),require('./images/crystal.png'),require('./images/ticket.png')],
 	//公共get请求函数
     /*get (obj){
     	return new Promise((resolve, reject)=>{

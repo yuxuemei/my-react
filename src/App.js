@@ -20,6 +20,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 // 引入模块页面
 import Home from './page/home.js'
 import Guess from './page/guess.js'
+import Interaction from './page/interaction.js'
 import Plan from './page/plan.js'
 import Detail from './page/detail.js'
 import Login from './page/login.js'
@@ -143,6 +144,7 @@ class App extends Component {
                 <div className="content"> 
                   <Route exact path="/" component={Home}/>
                   <Route path="/guess" component={Guess}/>
+                  <Route path="/interaction/:id" component={Interaction}/>
                   <Route path="/plan" component={Plan}/>
                   <Route path="/test" component={TestRouter}/>
                   <Route path="/detail/:id" component={Detail}/>
