@@ -1,0 +1,320 @@
+.password-title{
+    padding-left:.3rem;
+    height:.8rem;
+    line-height: .8rem;
+    color:#d1c9d6;
+}
+.password{
+    background: #ffffff;
+}
+.old-password{
+    position: relative;
+    height:1rem;
+    padding-left:.3rem;
+    padding-right:.3rem;
+    border-bottom:.02rem solid #f5f5f5;
+}
+.new-password{
+    position: relative;
+    padding-left:.3rem;
+    padding-right:.3rem;
+    height:1rem;
+}
+.psw-left{
+    position: absolute;
+    left:.3rem;
+    top:0;
+    bottom:0;
+    display: flex;
+    align-items:center;
+    font-size:.28rem;
+    color:#2b2031;
+}
+.psw-right{
+    margin-left:1.7rem;
+    height:100%;
+    display: flex;
+    align-items:center;
+}
+.psw-right input{
+    width:100%;
+    line-height: .3rem;
+}
+.pswphcolor{
+    color:#999999;
+}
+.true-psw{
+    margin-top:.2rem;
+    background: #ffffff;
+}
+.psw-bun{
+    margin-top:.4rem;
+}
+.sure-change,.forget-psw{
+
+}
+.sure-change{
+    height:.86rem;
+    line-height: .86rem;
+    width:6.78rem;
+    margin:0 auto;
+    border-radius:.5rem;
+    background-color: rgb(123,90,233);
+    text-align : center;
+    color:#ffffff;
+    font-size:.32rem;
+}
+.forget-psw{
+    margin-top:.3rem;
+    height:.8rem;
+    line-height: .8rem;
+    width:6.72rem;
+    margin-left: auto;
+    margin-right:auto;
+    border-radius:.5rem;
+    background-color: rgb(255,255,255);
+    border:.03rem solid rgb(123,90,233);
+    text-align : center;
+    color:rgb(123,90,233);
+    font-size:.32rem;
+}
+/*-------------个人中心---------*/
+.my-top{
+    height:1.74rem;
+    background:linear-gradient(#2a2131 10%, #3a2f42, #8a7799 115%);
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+.my-top-head{
+    margin-left:.16rem;
+    width:.96rem;
+    height:.96rem;
+    border-radius:100%;
+    background-color:#4a4254;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.my-top-head img{
+    width:.88rem;
+    height:.88rem;
+    border-radius:100%;
+}
+.my-top-name {
+    font-size:.26rem;
+    font-weight:bold;
+    color:rgb(0,210,255);
+}
+
+.img-sex{
+    width:.27rem;
+    height: .27rem;
+    margin-left: .1rem;
+}
+.my-top-right{
+    margin-left:.2rem;
+    padding-top:.05rem;
+}
+.top-edit {
+    right:.3rem;
+    top:.1rem;
+    display:flex;
+    align-items:center;
+}
+.top-edit-text {
+    font-size:.2rem;
+    color:#ffffff;
+}
+.dsac{
+    display:flex;
+    align-items:center;
+}
+.my-money-icon{
+    width:.45rem;
+    height:.48rem;
+    vertical-align: -.1rem;
+}
+.my-money-number{
+    width:1.24rem;
+    height:.38rem;
+    line-height:.38rem;
+    background-color:rgb(108,104,134);
+    border-radius:.5rem;
+    position:relative;
+}
+.number-box {
+    margin-right:.33rem;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ffffff;
+}
+.number-box span{
+    color: #fff;
+    font-size:.2rem;
+}
+.number-right{
+    width:.28rem;
+    height:.28rem;
+    background:#ffffff;
+    border-radius:100%;
+    top:2px;
+    right:.05rem;
+    font-size:.16rem!important;
+    color:#4c93ca;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    -webkit-transform: scale(0.9);
+}
+.big-menu{
+    width:100%;
+    background-color:#ffffff;
+    padding-bottom:.4rem;
+    margin-top: .2rem;
+}
+.big-menu .top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:.3rem .56rem .4rem .56rem;
+}
+.big-menu .top-img{
+    width:.77rem;
+    height:.81rem;
+}
+.big-menu .top-text{
+    font-weight:bold;
+    margin-top:.1rem;
+    color: #000;
+}
+.big-menu .bottom{
+    width:6.86rem;
+    height:1.64rem;
+    margin-left:auto;
+    margin-right:auto;
+    background:url('http://oslg9bt6h.bkt.clouddn.com/my-img.png') no-repeat;
+    background-size:100% 100%;
+}
+.big-menu .honor-box {
+    left:2.85rem;
+    bottom:.31rem;
+    display:flex;
+    align-items:center;
+}
+.honor-box .honor-item{
+    width:.23rem;
+    height:.34rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#2e261b;
+    margin-right:.05rem;
+    background:url('http://oslg9bt6h.bkt.clouddn.com/my_img_kuang_03.png') no-repeat;
+    background-size:100% 100%;
+}
+.my-block2,.my-block3,.my-block4{
+    background-color:#fff;
+}
+.my-block2{
+    height:.9rem;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top: .2rem;
+}
+.my-block2-right {
+    height:.9rem;
+    margin-right:.3rem;
+}
+.my-block2-right-text {
+    color:#ff7e16;
+}
+.my-block2-right-icon {
+    width:.12rem;
+    height:.22rem;
+}
+.block2-img{
+    width:.74rem;
+    height:.9rem;
+    margin-left:.2rem;
+    margin-right:.14rem;
+}
+.my-block3,.my-block4{
+    margin-top: .2rem;
+}
+.my-block3-list{
+    height: .9rem;
+    display: block;
+}
+.list-icon{
+    top:0;
+    bottom:0;
+    left:.2rem;
+    width:.74rem;
+}
+.list-icon img{
+    width:100%;
+    height:100%;
+}
+.my-block4{
+    padding-bottom:.5rem;
+}
+.list-block{
+    margin-left:1.08rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.make-money{
+    width:1.24rem;
+    height:.36rem;
+    line-height:.36rem;
+    background-color:#ff7e16;
+    color:#ffffff;
+    font-size:.2rem;
+    font-weight:bold; 
+    border-radius:.06rem;
+    margin-right:.02rem;
+}
+.my-earnings {
+    width:7.5rem;
+    height:1.9rem;
+    background:url('http://oslg9bt6h.bkt.clouddn.com/applet/img/my-img-1.png') no-repeat;
+    background-size:100% 100%;
+}
+.my-earnings-left{
+    width:50%;
+    height:100%;
+    float:left;
+}
+.my-earnings-right{
+    width:50%;
+    height:100%;
+    float:right;
+}
+.my-earnings-number{
+    height:.78rem;
+    border-right:1px solid #f7f5f8;
+    margin-top:.44rem;
+} 
+.dsfajc{
+   display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.my-earnings-text {
+    font-size:.2rem;
+    color:#838086;
+    margin-bottom:.18rem;
+}
+.img-arrow{
+    width:.27rem;
+    height:.27rem;
+    margin-left: .1rem;
+}
+/*-------------个人中心---------*/

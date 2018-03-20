@@ -10,6 +10,7 @@ import './home.css';
 import Common from './../common.js'
 import { Link } from 'react-router-dom'
 import Slider from './../Silder/Slider.js';
+import Footer from './../components/footer.js';
 
 class Home extends Component {
 	constructor(props){
@@ -110,7 +111,7 @@ class Home extends Component {
                             return (
 								<div key={idx} className="relative">
 		                            <img className="icon-hot absolute" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon_hot.png"></img>
-		                            <Link className="top-item" to="'/interaction/detail/'+competition.id">
+		                            <Link className="top-item" to={{pathname:`/interactiondetail/${competition.id}`}}>
 		                                <div>
 		                                <span className="dot"></span><span>{competition.title}</span>
 		                                { competition.apply == 1 ?<span className="apply center">已参加</span>:''}
@@ -132,7 +133,7 @@ class Home extends Component {
                         {   
                     		gameClassifyChild.gamesType.exist.map((sort,index)=>{
                                 return (
-                                    <Link key={index} className="top-item exist" to={{pathname: `interaction/${sort.id}`}}>
+                                    <Link key={index} className="top-item exist" to={`interaction/${sort.id}`}>
 		                                <div><span className="dot"></span><span>{sort.name}</span></div>
 		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="arrow-03"/></div>
 		                            </Link>
@@ -203,6 +204,7 @@ class Home extends Component {
                         })
                     }
 		        </div>
+		        <Footer />
 			</div>
 		)
 	}

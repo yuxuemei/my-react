@@ -1,17 +1,13 @@
 import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import { PullToRefresh, ListView } from 'antd-mobile';
-import store from './../redux/store.js';
-
-//引入定义的action
-import {loading } from '../actions/plan.js'
 
 import './home.css';
 
 import Common from './../common.js'
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
-
+import Footer from './../components/footer.js';
 
 const data = [
   {
@@ -142,7 +138,6 @@ class Guess extends Component {
     render() {
 	    let index = data.length - 1;
 	    const row = (rowData, sectionID, rowID) => {
-	    	console.log(rowData)
 	      if (index < 0) {
 	        index = data.length - 1;
 	      }
@@ -167,6 +162,7 @@ class Guess extends Component {
 		      renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}> {this.state.isLoading ? 'Loading...' : 'Loaded'} </div>)}
 		        renderRow={row} style={{height: this.state.height,border: '1px solid #ddd',margin: '5px 0'}}
 		        pullToRefresh={<PullToRefresh refreshing={this.state.refreshing} onRefresh={this.onRefresh} />} onEndReached={this.onEndReached}  pageSize={5}  />
+		        <Footer />
 		    </div>
 	    );
 	}

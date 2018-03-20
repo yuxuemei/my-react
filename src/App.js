@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router,Route,Link } from 'react-router-dom'
+import { Router,Route } from 'react-router-dom'
 //import logo from './logo.svg';
 //import Child from './child';
 //import ToggleButton  from './toggleButton';
@@ -21,8 +21,10 @@ import 'antd-mobile/dist/antd-mobile.css';
 import Home from './page/home.js'
 import Guess from './page/guess.js'
 import Interaction from './page/interaction.js'
-import Plan from './page/plan.js'
 import Detail from './page/detail.js'
+import Plan from './page/plan.js'
+import My from './page/my.js'
+import Detai from './page/detai.js'
 import Login from './page/login.js'
 import Recharge from './page/recharge.js'
 // 引入组件
@@ -44,12 +46,10 @@ class App extends Component {
         price:0,
         checked: false,
         totalChecked: 0,
-        bannerList:[],
-        url:history.location.pathname
+        bannerList:[]
      }
      //改变this上下文
      this.onChildChanged = this.onChildChanged.bind(this)
-     this.updateHandle = this.updateHandle.bind(this)
   }
   onChildChanged(newState){
     this.setState({
@@ -106,16 +106,8 @@ class App extends Component {
   componentWillUnmount(){
      //console.log('componentWillUnmount: ', this.state.age);
   }
-  //每次router变化之后都会触发
-  updateHandle() { 
-      this.setState({
-        url:history.location.pathname
-      })
-  } 
   render() {
     //var totalChecked =this.state.totalChecked;
-    var url = this.state.url;
-
     return (
       /*<div className="App">
         <p>{this.state.name}</p>
@@ -135,19 +127,15 @@ class App extends Component {
           <div> 
           <Router history = {history} >
              <div className="contentBox">
-                <div className="bottom-nav" onClick={this.updateHandle} style={url==='/' || url==='/plan' || url==='/test' || url==='/guess'?{}:{display:'none'}}>
-                  <Link to="/" className={url === '/' ? 'on' : ''}>首页</Link>
-                  <Link to="/guess" className={url === '/guess' ? 'on' : ''}>预测</Link>
-                  <Link to="/plan" className={url === '/plan' ? 'on' : ''}>计划表</Link>
-                  <Link to="/test" className={url === '/test' ? 'on' : ''}>二级路由</Link>
-                </div>
                 <div className="content"> 
                   <Route exact path="/" component={Home}/>
                   <Route path="/guess" component={Guess}/>
                   <Route path="/interaction/:id" component={Interaction}/>
+                  <Route path="/interactiondetail/:id" component={Detail}/>
                   <Route path="/plan" component={Plan}/>
+                  <Route path="/my" component={My}/>
                   <Route path="/test" component={TestRouter}/>
-                  <Route path="/detail/:id" component={Detail}/>
+                  <Route path="/detail/:id" component={Detai}/>
                   <Route path="/login" component={Login}/>
                   <Route path="/recharge" component={Recharge}/>
                 </div>

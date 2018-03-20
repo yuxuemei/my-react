@@ -1,16 +1,13 @@
 import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import { PullToRefresh, ListView } from 'antd-mobile';
-import store from './../redux/store.js';
 
 //引入定义的action
 import {loading } from '../actions/plan.js'
 
-import './home.css';
-
 import Common from './../common.js'
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom'
+import { Route,Link } from 'react-router-dom'
 
 import  './interaction.css'
 
@@ -94,11 +91,10 @@ class Interaction extends Component {
             },
         }).then(respose=>{
             var list = this.state.matchList;
+            this.setState({
+                matchList:[...list,...respose]
+            })
             if(pageIndex == 1){
-                list = respose;
-                this.setState({
-                    matchList:list
-                })
                 //下拉加载
                 if(type == 'fresh'){
                     if(respose.length>=NUM_ROWS){
@@ -119,10 +115,6 @@ class Interaction extends Component {
                     }
                 }
             }else{
-                list = list.concat(respose);
-                this.setState({
-                    matchList:list
-                })
                 //上滑加载
                 if(type == 'end'){
                     this.setState({ isLoading: true,isAll:false});
@@ -202,13 +194,6 @@ class Interaction extends Component {
             )
         }
     }
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps.matchList.length);
-        console.log(this.state.matchList.length);
-        if(nextProps.matchList.length !== this.state.matchList.length){
-            //console.log('componentWillReceiveProps === '+nextProps);
-        }
-    }
     render() {
         var match = this.state.matchList;
 	    let index = match.length - 1;
@@ -238,7 +223,7 @@ class Interaction extends Component {
             }
 
             return (
-                <Link key={rowID} className="item" to={{pathname: `interaction/${obj.id}`}}>
+                <Link key={rowID} className="item" to={`/interactiondetail/${obj.id}`}>
                     <div className="title_bar">
                         <img src={obj.small_program_cover?obj.small_program_cover:require('./../images/item-bg.png')} className="image_title_bg"></img>
                         <div className="title_bar_content">

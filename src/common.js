@@ -14,6 +14,7 @@ if(localStorage.userinfo){
 }
 var Common = {
     CURRECY:[require('./images/gold.png'),require('./images/diamond.png'),require('./images/crystal.png'),require('./images/ticket.png')],
+    IMG_DEFAULT : "http://oslg9bt6h.bkt.clouddn.com/default-img1.png",
 	//公共get请求函数
     /*get (obj){
     	return new Promise((resolve, reject)=>{
@@ -131,6 +132,13 @@ var Common = {
            }
            return format;
         }
+    },
+    formatNumber(number) {
+        if(number>10000){
+            return (parseInt(number)/10000).toFixed(2)+"万";
+        }else{
+            return number;
+        } 
     }
 }
 

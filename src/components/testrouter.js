@@ -3,6 +3,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import Footer from './../components/footer.js';
 
 const Topic = ({ match }) => (
   <div>
@@ -41,6 +42,7 @@ class TestRouter extends Component {
             <Route exact path={this.props.match.url} render={() => (
               <h3>请选择一个主题。</h3>
             )}/>
+            <Footer />
           </div>
         )
     }

@@ -42,6 +42,12 @@ export default class Slider extends Component {
   componentDidMount() {
     this.goPlay();
   }
+  componentWillUnmount() {
+    //解决路由改变了slider还未卸载就setState问题
+    this.setState = (state,callback)=>{
+      return;
+    }; 
+  }
 
   render() {
     let count = this.props.items.length;

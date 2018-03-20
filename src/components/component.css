@@ -166,3 +166,73 @@
 .plan-title{
     width: 40%;
 }
+
+/*底部footer*/
+.tab-bar {
+   font-size:.26rem;
+}
+.tab-bar img{
+   width: .74rem;
+   height: .93rem;
+}
+.z-fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  z-index: 2; 
+  margin-left: -3.75rem;
+}
+.z-footer {
+  height: 1rem;
+  background: #FFFFFF;
+  color: #7b787c;
+  border-top: 1px solid #e2e2e2;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; 
+  width: 7.5rem;
+}
+  .z-footer .item {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: block;
+}
+  .z-footer .text {
+    line-height: 1rem; 
+}
+  .z-footer .act {
+    color: #2c2031; 
+}
+  .z-footer img {
+    margin-top: .04rem;
+    margin-bottom: .04rem;
+    max-width: inherit;
+}
+.tab-bar-name{
+  position:absolute;
+  bottom:.12rem;
+  left:0;
+  right:0;
+  font-size:.18rem;
+  color:#a69ac4;
+  text-align: center;
+}
+.tab-bar .item.act .tab-bar-name{
+  color:#8f66da;
+}
+.redDot-small{
+  background-color:#e2544e;
+  padding: .03rem .1rem;
+  border-radius:.5rem;
+  color:#fff;
+  position:absolute;
+  left:.85rem;
+  top:.13rem;
+  font-size:.18rem;
+  border: .01rem solid #ffffff;
+}
