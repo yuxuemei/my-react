@@ -37,6 +37,7 @@ const history = createHistory();
 
 class App extends Component {
   constructor(props){
+     //获取this对象
      super(props);
      //console.log("parent");
      //console.log(props);
