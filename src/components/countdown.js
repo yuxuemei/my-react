@@ -28,30 +28,30 @@ class Countdowm extends Component {
               hour = hour < 10 ? "0" + hour : hour;
               var hourFormat = hour < 10 ? "<span>0</span><span>" + hour.toString().charAt(1)+"</span>" : "<span>"+hour.toString().charAt(0)+"</span><span>"+hour.toString().charAt(1)+"</span>";
               min = min < 10 ? "<span>0</span><span>" + min + "</span>" : "<span>"+min.toString().charAt(0)+"</span><span>"+min.toString().charAt(1)+"</span>";
-              if(self.format == 'true'){
+              if(self.format === 'true'){
                  sec = sec < 10 ? "<span style='margin-left:5px;'>0</span><span>" + sec + "</span>" : "<span>"+sec.toString().charAt(0)+"</span><span>"+sec.toString().charAt(1)+"</span>";
-              }else if(self.format == 'false'){
+              }else if(self.format === 'false'){
                   sec = sec < 10 ? "<span>0</span><span>" + sec + "</span>" : "<span>"+sec.toString().charAt(0)+"</span><span>"+sec.toString().charAt(1)+"</span>";
               }
               let format = '';
               if(day > 0){
-                 if(self.format == 'true'){
+                 if(self.format === 'true'){
                     format =  `${dayFormat}<span class="timer-text">天</span>${hourFormat}<span class="timer-text">时</span>${min}<span class="timer-text">分</span>${sec}<span class="timer-text">秒</span>`;
-                 }else if(self.format == 'false'){
+                 }else if(self.format === 'false'){
                     format =  `${dayFormat}<span class="timer-text"> 天 </span>${hourFormat}<span class="timer-text"> <span>:</span> </span>${min}<span class="timer-text"> <span>:</span> </span>${sec}<span class="timer-text"></span>`;
                  }
               }
               if(day <= 0 && hour > 0 ){
-                  if(self.format == 'true'){
+                  if(self.format === 'true'){
                     format = `${hourFormat}<span class="timer-text">时</span>${min}<span class="timer-text">分</span>${sec}<span class="timer-text">秒</span>`;
-                  }else if(self.format == 'false'){
+                  }else if(self.format === 'false'){
                     format = `${hourFormat}<span class="timer-text"> <span>:</span> </span>${min}<span class="timer-text"> <span>:</span> </span>${sec}<span class="timer-text"></span>`;
                   }
               }
               if(day <= 0 && hour <= 0){
-                 if(self.format == 'true'){
+                 if(self.format === 'true'){
                     format =`${min}分${sec}<span class="timer-text">秒</span>`;
-                  }else if(self.format == 'false'){
+                  }else if(self.format === 'false'){
                     format =`${min} <span>:</span> ${sec}<span class="timer-text"></span>`;
                   }
               }

@@ -2,12 +2,9 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import { PullToRefresh, ListView } from 'antd-mobile';
 
-//引入定义的action
-import {loading } from '../actions/plan.js'
-
 import Common from './../common.js'
 import ReactDOM from 'react-dom';
-import { Route,Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import  './interaction.css'
 
@@ -94,9 +91,9 @@ class Interaction extends Component {
             this.setState({
                 matchList:[...list,...respose]
             })
-            if(pageIndex == 1){
+            if(pageIndex === 1){
                 //下拉加载
-                if(type == 'fresh'){
+                if(type === 'fresh'){
                     if(respose.length>=NUM_ROWS){
                         this.setState({ refreshing: true, isLoading: true ,isAll:false});
                         // simulate initial Ajax
@@ -116,7 +113,7 @@ class Interaction extends Component {
                 }
             }else{
                 //上滑加载
-                if(type == 'end'){
+                if(type === 'end'){
                     this.setState({ isLoading: true,isAll:false});
                     setTimeout(() => {
                         this.rData = [...this.rData, ...this.genData(respose.length)];
@@ -158,9 +155,9 @@ class Interaction extends Component {
 		    {
 		    	state.tags.map((tag,index)=>{
                     return (
-                        <div key={index} className={state.currentTagIndex == index?'act':''} onClick={this.serchByTag.bind(this,index,tag.id)}>
+                        <div key={index} className={state.currentTagIndex === index?'act':''} onClick={this.serchByTag.bind(this,index,tag.id)}>
 					    	<span className="nav-title">{tag.title}</span>
-					    	<div className={`absolute ${state.currentTagIndex == index ? 'border' : ''}`}></div>
+					    	<div className={`absolute ${state.currentTagIndex === index ? 'border' : ''}`}></div>
 					    </div>
                     )
                 })
@@ -169,18 +166,18 @@ class Interaction extends Component {
 		)
 	}
     renderBottomBar(){
-        if(this.state.isLoading && !this.state.isAll && pageIndex != 1){
-            return (<img className="loading-gif" src={require('./../images/loading.gif')}/>)
+        if(this.state.isLoading && !this.state.isAll && pageIndex !== 1){
+            return (<img className="loading-gif" src={require('./../images/loading.gif')} alt="loading-gif"/>)
         }else if(!this.state.isLoading && this.state.isAll){
             return (<span style={{fontSize: '0.22rem', color: 'rgb(142, 148, 183)'}}>没有更多数据了</span>)
         }
     }
     renderContainer(row){
-        if(this.state.matchList.length == 0){
+        if(this.state.matchList.length === 0){
             return(
                 <div>
                 <div className="default">
-                    <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/default.png"></img>
+                    <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/default.png" alt="default"></img>
                 </div>
                 <div className="default-text center">这里暂时还没有比赛</div>
             </div>
@@ -204,32 +201,32 @@ class Interaction extends Component {
 	        const obj = match[index--];
 
             let circular,state;
-            if (obj.match_status == 2) {
+            if (obj.match_status === 2) {
                 circular = (<span className="circular absolute" style={{backgroundColor:'#B52E25'}}></span>);
             } else {
                 circular = (<span className="circular absolute" ></span>);
             }
 
-            if (obj.match_status == 0) {
+            if (obj.match_status === 0) {
                 state = (<span className="state absolute">未开始</span>);
-            } else if(obj.match_status == 1) {
+            } else if(obj.match_status === 1) {
                 state = (<span className="state absolute">报名中</span>);
-            } else if(obj.match_status == 2) {
+            } else if(obj.match_status === 2) {
                 state = (<span className="state absolute" style={{color:'#B52E25'}}>比赛中</span>);
-            } else if(obj.match_status == 3) {
+            } else if(obj.match_status === 3) {
                 state = (<span className="state absolute">已结束</span>);
-            } else if(obj.match_status == -1) {
+            } else if(obj.match_status === -1) {
                 state = (<span className="state absolute">终止比赛</span>);
             }
 
             return (
                 <Link key={rowID} className="item" to={`/interactiondetail/${obj.id}`}>
                     <div className="title_bar">
-                        <img src={obj.small_program_cover?obj.small_program_cover:require('./../images/item-bg.png')} className="image_title_bg"></img>
+                        <img src={obj.small_program_cover?obj.small_program_cover:require('./../images/item-bg.png')} className="image_title_bg" alt="item-bg"></img>
                         <div className="title_bar_content">
                             <div className="title">
                                 <div className="relative" v-if="item.tag_title">
-                                    <img style={{marginTop:'.12rem'}} src={require('./../images/tag_normal.png')} className="img_tag"></img>
+                                    <img style={{marginTop:'.12rem'}} src={require('./../images/tag_normal.png')} className="img_tag" alt="tag_normal"></img>
                                     <span className="tag">{obj.tag_title}</span>
                                 </div>
                                 <div className="moreDot" style={{'width':obj.tag_title?'4rem':'5.35rem','display':'inline-block','color':'#fff'}}>{obj.title}</div>
@@ -249,16 +246,16 @@ class Interaction extends Component {
                             <div className="info-item" >
                                 <div>
                                    <img src={this.state.currency[obj.owner_type-1]} 
-                                   className={`${obj.owner_type == 1 || obj.owner_type == 2 ? 'image-diamond' : ''} ${obj.owner_type == 3 ? 'image-crystal' : ''} ${obj.owner_type == 4 ? 'image-ticket' : ''}`} 
-                                   style={{marginLeft:'2px'}}></img>
+                                   className={`${obj.owner_type === '1' || obj.owner_type === '2' ? 'image-diamond':''} ${obj.owner_type === '3' ? 'image-crystal' : ''} ${obj.owner_type === '4' ? 'image-ticket' : ''}`} 
+                                   style={{marginLeft:'2px'}} alt="currency"></img>
                                     <span className="value">{obj.totals}</span>
                                 </div>
                                 <div>奖金总额</div>
                             </div>
                             <div className="info-item" style={{borderRight:'none'}}>
                                 <div className="value">
-                                    <img src={this.state.currency[obj.apply_type-1]}
-                                    className={`${obj.apply_type == 1 || obj.apply_type == 2 ? 'image-diamond' : ''} ${obj.apply_type == 3 ? 'image-crystal' : ''} ${obj.apply_type == 4 ? 'image-ticket' : ''}`} ></img>
+                                    <img src={this.state.currency[obj.apply_type-1]} alt="currency"
+                                    className={`${obj.apply_type === 1 || obj.apply_type === 2 ? 'image-diamond' : ''} ${obj.apply_type === 3 ? 'image-crystal' : ''} ${obj.apply_type === 4 ? 'image-ticket' : ''}`} ></img>
                                     {obj.apply_limit}
                                 </div>
                                 <div>报名费</div>
@@ -271,15 +268,15 @@ class Interaction extends Component {
                     </div>
                     <div className="bottom">
                         <div className="time">
-                            <img src={require('./../images/time.jpg')} className="image-time"></img>
+                            <img src={require('./../images/time.jpg')} className="image-time" alt="time"></img>
                             开赛 {Common.formatDate(obj.begin_time,'MM/dd hh:mm')}
                         </div>
                         <div className="people">{ obj.begin_condition>0 ? `(满${obj.begin_condition}人开)` : '(必开)' }</div>
                     </div>
+                    <div className="apply-tag" style={obj.apply === 1?{right:'1.5rem'}:{right:'1.5rem',display:'none'}}>已参加</div>
                 </Link>
             )
         } 
-	    // renderHeader={() => <span>Pull to refresh</span>}
 	    return (
 	    	<div  className="match">
 	    	    {this.renderNav()}

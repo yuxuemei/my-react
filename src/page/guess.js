@@ -6,7 +6,6 @@ import './home.css';
 
 import Common from './../common.js'
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom'
 import Footer from './../components/footer.js';
 
 const data = [
@@ -125,9 +124,9 @@ class Guess extends Component {
 		    {
 		    	state.classifys.map((classify,index)=>{
                     return (
-                        <div key={index} className={state.currentClassifyIndex == index?'act':''} onClick={this.serchByClassify.bind(index,index,classify.game_id)}>
+                        <div key={index} className={state.currentClassifyIndex === index?'act':''} onClick={this.serchByClassify.bind(index,index,classify.game_id)}>
 					    	<span className="nav-title">{classify.title}</span>
-					    	<div className={`absolute ${state.currentClassifyIndex == index ? 'border' : ''}`}></div>
+					    	<div className={`absolute ${state.currentClassifyIndex === index ? 'border' : ''}`}></div>
 					    </div>
                     )
                 })
@@ -145,9 +144,9 @@ class Guess extends Component {
 	      return (
 	        <div key={rowID} style={{ padding: '0 15px',  backgroundColor: 'white'}} >
 	            <div style={{ height: '50px', lineHeight: '50px', color: '#888', fontSize: '18px', borderBottom: '1px solid #ddd' }}>{obj.title}</div>
-		        <div style={{ display: '-webkit-box', display: 'flex', padding: '15px' }}>
-		            <img style={{ height: '63px', width: '63px', marginRight: '15px' }} src={obj.img} alt="" />
-		            <div style={{ display: 'inline-block' }}>
+		        <div style={{ display: 'flex', padding: '15px' }}>
+		            <img style={{ height: '63px', width: '63px', marginRight: '15px' }} src={obj.img} alt="img" />
+		            <div>
 		              <div style={{ marginBottom: '8px', color: '#000', fontSize: '16px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '250px' }}>{obj.des}-{rowData}</div>
 		              <div style={{ fontSize: '16px' }}><span style={{ fontSize: '30px', color: '#FF6E27' }}>{rowID}</span> 元/任务</div>
 		            </div>

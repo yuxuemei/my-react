@@ -1,10 +1,12 @@
 //import 'es6-promise'
 import axios from 'axios'
 import store from './redux/store.js';
+import { Toast } from 'antd-mobile';
 
 //引入定义的action
 import { user } from './actions/plan.js'
-axios.defaults.baseURL = 'https://api.91war.com';
+axios.defaults.baseURL = 'http://192.168.5.184:8019';
+//axios.defaults.baseURL = 'https://api.91war.com';
 if(localStorage.t){
 	//登录成功后，在加头信息，不认取的有误
 	axios.defaults.headers.common['Authorization'] = localStorage.t;
@@ -82,18 +84,24 @@ var Common = {
     error(error,obj,reject){
         if (error.response) {
             // 请求已发出，但服务器响应的状态码不在 2xx 范围内
-            if(error.response.status == 401){
+            if(error.response.status === 401){
                 console.log("进入登录界面");
             }else{
                 if(error.response.data.info){
-                    if(obj.popupInfo == false){
+                    if(obj.popupInfo === false){
                         reject(error.response);
                     }else{
-                        console.log(error.response.data.info);
+                        Toast.fail(error.response.data.info, 2)
                     }
                 }
             }
         }
+    },
+    success(info){
+        Toast.success(info, 2)
+    },
+    fail(info){
+        Toast.fail(info, 2)
     },
     getUserInfo(callback) {
         return new Promise((resolve, reject)=>{
@@ -108,7 +116,7 @@ var Common = {
     },
     formatDate(value,format) {
         if(value){
-            if(value.toString().length == 10){
+            if(value.toString().length === 10){
                 value = value*1000
             }
             var dateObj = new Date(value);
@@ -127,7 +135,7 @@ var Common = {
             }
             for (let k in date) {
                 if (new RegExp("(" + k + ")").test(format)) {
-                    format = format.replace(RegExp.$1, RegExp.$1.length == 1? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                    format = format.replace(RegExp.$1, RegExp.$1.length === 1? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
                 }
            }
            return format;
@@ -135,7 +143,8 @@ var Common = {
     },
     formatNumber(number) {
         if(number>10000){
-            return (parseInt(number)/10000).toFixed(2)+"万";
+            //Missing radix parameter  radix解决这个警告 严格模式需要
+            return (parseInt(number,10)/10000).toFixed(2)+"万";
         }else{
             return number;
         } 

@@ -590,3 +590,9 @@
   font-size: 14px;
   padding: 30px 0 18px 0;
 }
+.finish-lineup-bg .slider-list{
+	height: 1000px!important;
+}
+.my-match-guess{
+	height: 50%!important;
+}

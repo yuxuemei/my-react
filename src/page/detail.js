@@ -2,7 +2,7 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import Common from './../common.js'
 import { Link } from 'react-router-dom'
-import { Carousel, WhiteSpace, WingBlank } from 'antd-mobile'
+import { Carousel } from 'antd-mobile'
 import Countdowm from './../components/countdown.js'
 import './detail.css';
 
@@ -53,7 +53,7 @@ class Detail extends Component {
 		            	applyId:respose.apply[0].id
 		            });
                     respose.apply.map((item, key)=>{
-                        if(item.rank == respose.my_sort[0].rank){
+                        if(item.rank === respose.my_sort[0].rank){
                             this.setState({
                             	myApplyId:item.id
                             });
@@ -71,7 +71,7 @@ class Detail extends Component {
                 }
             }
             //结束了才获取阵容数据
-            if(respose.match_status == 3){
+            if(respose.match_status === 3){
                 this.getBg(respose.games_id);
                 if(respose.apply){
                     this.setState({
@@ -113,7 +113,7 @@ class Detail extends Component {
     tabSwitch(index){
         this.setState({tabIndex:index})
         //查询阵容数据
-        if(index == 1){
+        if(index === 1){
             this.getLineupUser();
         }
     }
@@ -181,46 +181,48 @@ class Detail extends Component {
         this.getActivityData();
     }
     //报名之前检查钱是否足够
-    //type: 1 加入 2 追加 <countdown className="match-timer center" format='false' endTime="match.begin_time" endText="00:00:00" callback="callback"></countdown>
+    //type: 1 加入 2 追加
     checkMoney(money,type){
         Common.get({
             url:'/api/apply/check',
-            match: {
+            data: {
                 activityId: this.state.id
             },
         }).then(respose=>{
-            if (this.state.match.model == 1) {
+            if (this.state.match.model === 1) {
                 if (respose.money >= respose.apply_apply_limit[0]) {
                 	Common.post({
 		                url:'/api/apply/activity',
-		                match: {
-		                    activityId: parseInt(this.state.id),
-		                    money : parseInt(money),  //下注金额
+		                data: {
+		                    activityId: parseInt(this.state.id,10),
+		                    money : parseInt(money,10),  //下注金额
                             type:type
 		                }
 		            }).then(res=>{
 		            	//报名成功之后重新获取货币信息
-                        this.getUserInfo();
-                        this.confirm("成功");
-                        this.getMatchDetail(this.state.id);
-                        this.getApply(this.state.id);
-                        //报名成功并且金额足够时直接跳转到阵容配置页
-                        this.$router.push('/interaction/lineup?applyId='+res.applyId+'&activityId='+ this.id);
+                        Common.getUserInfo(()=>{
+                        	this.confirm("成功");
+	                        this.getMatchDetail(this.state.id);
+	                        this.getApply(this.state.id);
+	                        //报名成功并且金额足够时直接跳转到阵容配置页
+                            var path={  
+                                    pathname:'/lineup',  
+                                    query:{
+                                        applyId:res.applyId,
+                                        activityId:this.state.id
+                                    }  
+                                }  
+	                        this.props.history.push(path);
+                        });
 		            })
                 } else {
-                    this.confirm('老板，您的门票不够，需要兑换'+(parseInt(respose.apply_apply_limit[0])-respose.money)+'门票,为您打开兑换页面！');
-                    /*setTimeout(function () {
-                        app.exchangeTicket.default.show({
-                            myDiamond:app.globalData.my.diamonds,
-                            diamondNumber:''
-                        })
-                    }, 2000);*/
+                    this.confirm('老板，您的门票不够，需要兑换'+(parseInt(respose.apply_apply_limit[0],10)-respose.money)+'门票,为您打开兑换页面！');
                 }
             }
         })
     } 
     renderTableHead(item,index){
-    	if(index == 0){
+    	if(index === 0){
     		return(
     			<div className="head-bar item">
                     <span className="cell">名称</span>
@@ -240,6 +242,21 @@ class Detail extends Component {
     		)
     	}
     }
+    renderLineupPlayer(item){
+        if(!item.player_id){
+            return(
+                <span className="location_name absolute">{item.name}</span> 
+            );
+        }else{
+            return(
+                <div>
+                    <img className="select-head absolute" src={item.head} alt="head"></img>                                
+	                <span className="power absolute intercept center">{item.power}</span>
+	                <div  className="location absolute"><span>{item.location_name || ''}:</span><span style={{color:'#c43c43'}}>￥{item.price}万</span></div>
+                </div>
+            )
+        }
+    }
     renderResult(data){
     	var tabIndex = this.state.tabIndex;
     	var mySort;
@@ -249,13 +266,13 @@ class Detail extends Component {
                 get_gold =(
                 	<div>
                     	{data.my_sort[0].get_gold || 0}
-                        <img src={this.state.currency[data.my_sort[0].get_type-1]} className={data.my_sort[0].get_type != 4?'image-diamond':'image-ticket'}></img>
+                        <img src={this.state.currency[data.my_sort[0].get_type-1]} className={data.my_sort[0].get_type !== 4?'image-diamond':'image-ticket'} alt="currency"></img>
                     </div>);
     		}
     		mySort = (
     			<div className="rank-item my">
                     <span className="index">{data.my_sort[0].rank}</span>
-                    <img className="avatar" src={data.my_sort[0].head  || Common.IMG_DEFAULT} />
+                    <img className="avatar" src={data.my_sort[0].head  || Common.IMG_DEFAULT} alt="avator"/>
                     <span className="username">{data.my_sort[0].nickname}</span>
                     <div style={{width:'2.5rem'}}>
                         {get_gold}
@@ -264,41 +281,41 @@ class Detail extends Component {
                 </div>
     		)
     	}
-    	if(tabIndex == 0){
+    	if(tabIndex === 0){
             return(
             	<div className="rank">
 		            <div className="rank-head">
 		                <Link  to="'/interaction/vs?uid='+data.activity_sort[1].uid+'&gameid='+id+'&applyId='+data.activity_sort[1].id+'&my='+myApplyId"  className={`item two {'cen':data.activity_sort.length == 2}`} v-if="data.activity_sort && data.activity_sort.length > 1">
 		                    <div className="username">{data.activity_sort[1].nickname}</div>
 		                    <div className="image">
-		                        <img src={data.activity_sort[1].head  || Common.IMG_DEFAULT} />
+		                        <img src={data.activity_sort[1].head  || Common.IMG_DEFAULT} alt="avator"/>
 		                    </div>
 		                    <div className="score">{data.activity_sort[1].integral || 0}分</div>
 		                    <div className="number">
 		                        {data.activity_sort[1].get_gold || 0}
-		                        <img src={this.state.currency[data.activity_sort[1].get_type-1]} className={data.activity_sort[1].get_type != 4?'image-diamond':'image-ticket'}></img>
+		                        <img src={this.state.currency[data.activity_sort[1].get_type-1]} className={data.activity_sort[1].get_type !== 4?'image-diamond':'image-ticket'} alt="avator"></img>
 		                    </div>
 		                </Link>
 		                <Link to="'/interaction/vs?uid='+data.activity_sort[0].uid+'&gameid='+id+'&applyId='+data.activity_sort[0].id+'&my='+myApplyId" className="item one" v-if="data.activity_sort && data.activity_sort.length > 0">
 		                    <div className="username">{data.activity_sort[0].nickname}</div>
 		                    <div className="image">
-		                        <img src={data.activity_sort[0].head  || Common.IMG_DEFAULT} />
-		                    </div>
+		                        <img src={data.activity_sort[0].head  || Common.IMG_DEFAULT} alt="avator"/>
+		                    </div>alt="avator"
 		                    <div className="score">{data.activity_sort[0].integral || 0}分</div>
 		                    <div className="number">
 		                        {data.activity_sort[0].get_gold || 0}
-		                        <img src={this.state.currency[data.activity_sort[0].get_type-1]} className={data.activity_sort[0].get_type != 4?'image-diamond':'image-ticket'}></img>
+		                        <img src={this.state.currency[data.activity_sort[0].get_type-1]} className={data.activity_sort[0].get_type !== 4?'image-diamond':'image-ticket'} alt="avator"></img>
 		                    </div>
 		                </Link>
 		                <Link  to="'/interaction/vs?uid='+data.activity_sort[2].uid+'&gameid='+id+'&applyId='+data.activity_sort[2].id+'&my='+myApplyId" className="item three" v-if="data.activity_sort && data.activity_sort.length > 2">
 		                    <div className="username">{data.activity_sort[2].nickname}</div>
 		                    <div className="image">
-		                        <img src={data.activity_sort[2].head  || Common.IMG_DEFAULT} />
+		                        <img src={data.activity_sort[2].head  || Common.IMG_DEFAULT} alt="avator"/>
 		                    </div>
 		                    <div className="score">{data.activity_sort[2].integral || 0}分</div>
 		                    <div className="number">
 		                        {data.activity_sort[2].get_gold || 0}
-		                        <img src={this.state.currency[data.activity_sort[2].get_type-1]} className={data.activity_sort[2].get_type != 4?'image-diamond':'image-ticket'}></img>
+		                        <img src={this.state.currency[data.activity_sort[2].get_type-1]} className={data.activity_sort[2].get_type !== 4?'image-diamond':'image-ticket'} alt="avator"></img>
 		                    </div>
 		                </Link>
 		            </div>
@@ -309,11 +326,11 @@ class Detail extends Component {
 		                    		return(
 		                    			<Link key={index} to="/my" className="rank-item" v-if="index > 2">
 				                            <span className="index">{index + 1}</span>
-				                            <img className="avatar" src={item.head || Common.IMG_DEFAULT} />
+				                            <img className="avatar" src={item.head || Common.IMG_DEFAULT} alt="avator"/>
 				                            <span className="username">{item.nickname}</span>
 				                            <div className="number score">
 				                                {item.get_gold || 0}
-				                                <img src={this.state.currency[item.get_type-1]} className={item.get_type != 4?'image-diamond':'image-ticket'}></img>
+				                                <img src={this.state.currency[item.get_type-1]} className={item.get_type !== 4?'image-diamond':'image-ticket'} alt="avator"></img>
 				                            </div>
 				                            <span className="score">{item.integral || 0}分</span>
 				                        </Link>
@@ -325,67 +342,90 @@ class Detail extends Component {
 		            </div>
 		        </div>
             )
-    	}else if(tabIndex == 1){
-            /*return(
-               <Carousel autoplay={true} infinite className="vs-list" style={{background:'transparent',marginBottom:'0'}}>
-		          {this.state.lineups.map((item,index) => (
-		            <div key={index} className="my-match-guess">
-			            <div className="my-lineup" :style="{'background-image':'url('+bg+')','background-size':'100%'}">
-                            <div className="item relative" v-for="(item,index) in item.player"  @click="userTabSwitch(index,item.player_id)">
-                                <img v-if="item.player_id" className="select-head absolute" :src="item.head"></img>
-                                <img v-if="item.player_id" className="select-tag" src="../../images/person-selected.png"></img>
-                                <span v-if="item.player_id" className="power absolute intercept center">{{item.power}}</span>
-                                <div v-if="item.player_id" className="location absolute"><span>{{item.location_name || ''}}:</span><span style="color:#c43c43;">￥{{item.price}}万</span></div>
-                                <span className="userinfo absolute moreDot center">{{item.name}}</span>
-                            
-                                <img v-if="!item.player_id" className="select-normal" src="../../images/select-normal.png"></img>
-                                <span v-if="!item.player_id" className="location_name absolute">{{item.name}}</span> 
-                            </div>
-                        </div>
-                        <div className="capability-bar center">
-                            <img className="image-capability" src="../../images/capability.png"></img>
-                            总战力：{{allPowerNumber}}
-                        </div>
-                        <div  className="lineup-tab">
-                            <div  v-for="(item,index) in item.player" :key="index" className="lineup-item" :className="{'user-selected':userTabIndex==index}" @click="userTabSwitch(index,item.player_id)">
-                                <span className="label">{{item.player_name || item.name}}</span>
-                                <div>
-                                    <img  className="image-head" :className="{'head-selected':userTabIndex==index}" :src="item.head"></img>
-                                </div>     
-                            </div>
-                        </div>
-                        <div  className="lineup-data-tab">
-                            <div className="data-item">比赛数据</div>
-                            <div className="data-item">系数</div>
-                            <div className="data-item">结果</div>
-                        </div>
-                        <div className="lineup-data-list" v-for="(item,index) in playerDataList" :key="index">
-                            <div className="list-item">
-                                <span className="player-title">{{item.item_name}}</span>
-                                <span className="dot">  .....................</span>
-                                <span className="player-value center">{{item.item_integral}}</span>
-                                <span className="player-value center" style="margin-left:.15rem">{{item.extend_value}}</span>
-                                <span className="player-value number center" style="margin-left:.15rem">{{item.integral}}</span>
-                            </div>
-                        </div>
-                        <div style="padding-bottom: .3rem;" v-if="playerDataList.length == 0">
-				    		<div className="default">
-					            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/default.png"></img>
-					        </div>
-					        <div className="default-text center">暂无比赛数据</div>
-				    	</div>
-		            </div>
-		          ))}
-		        </Carousel>
-            )*/
-    	}else if(tabIndex == 2){
+    	}else if(tabIndex === 1){
+    		let defaultHtml;
+    		if(this.state.playerDataList.length === 0){
+                defaultHtml = (
+                 <div style={{paddingtottom: '.3rem'}}>
+		    		<div className="default">
+			            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/default.png" alt="default"></img>
+			        </div>
+			        <div className="default-text center">暂无比赛数据</div>
+		    	</div>
+		    	)
+    		}
+            return(
+                <div className="finish-lineup-bg">
+                    <div style={{background:'transparent',height: '600px'}}>	
+		                <Carousel autoplay={true} infinite dots={false} style={{background:'transparent',marginBottom:'0'}}>
+				          {this.state.lineups.map((lineups,index) => (
+				            <div key={index} className="my-match-guess">
+					            <div className="my-lineup" style={{backgroundImage:'url('+this.state.bg+')',backgroundSize:'100%'}}>
+						            {
+						            	lineups.player.map((item,index)=>{
+						            		return (
+						            			<div key={index} className="item relative">
+						            			    <img className="select-tag" src={item.player_id?require('./../images/person-selected.png'):require('./../images/select-normal.png')} alt="select-tag"></img>
+					                                {this.renderLineupPlayer(item)}
+					                                <span className="userinfo absolute moreDot center">{item.name}</span>
+					                            </div>
+						            		);
+						            	})
+						            }
+		                        </div>
+		                        <div className="capability-bar center">
+		                            <img className="image-capability" src={require('./../images/capability.png')} alt="capability"></img>
+		                            总战力：{this.state.allPowerNumber}
+		                        </div>
+		                        <div  className="lineup-tab">
+		                            {
+		                            	lineups.player.map((item,idx)=>{
+		                            		return(
+		                            			<div key={idx} className={`lineup-item ${this.state.userTabIndex===idx?'user-selected':''}`} onClick={this.userTabSwitch.bind(this,idx,item.player_id)}>
+					                                <span className="label">{item.player_name || item.name}</span>
+					                                <div>
+					                                    <img className={`image-head ${this.state.userTabIndex===idx?'head-selected':''}`} src={item.head} alt="head"></img>
+					                                </div>     
+					                            </div>
+		                            		)
+		                            	})
+		                            }
+		                        </div>
+		                        <div  className="lineup-data-tab">
+		                            <div className="data-item">比赛数据</div>
+		                            <div className="data-item">系数</div>
+		                            <div className="data-item">结果</div>
+		                        </div>
+		                        {
+		                        	this.state.playerDataList.map((item,index)=>{
+                                        return(
+                                            <div className="lineup-data-list" key={index}>
+					                            <div className="list-item">
+					                                <span className="player-title text-left">{item.item_name}</span>
+					                                <span className="dot text-left">  .....................</span>
+					                                <span className="player-value center">{item.item_integral}</span>
+					                                <span className="player-value center" style={{marginLeft:'.15rem'}}>{item.extend_value}</span>
+					                                <span className="player-value number center" style={{marginLeft:'.15rem'}}>{item.integral}</span>
+					                            </div>
+					                        </div>
+                                        );
+		                        	})
+		                        }
+		                        {defaultHtml}
+				            </div>
+				          ))}
+				        </Carousel>
+			        </div>
+		        </div>
+            )
+    	}else if(tabIndex === 2){
             return(
             	<div className="reuslt-data">
 		            <div className="vs-tab">
 		                {
 		                	this.state.activity_club.map((item,index)=>{
 		                		return(
-		                			<div key={index} className={`item center ${item.sessionId == this.state.sessionId?'act':''}`} onClick={this.vsSwitch.bind(this,item.sessionId)}>
+		                			<div key={index} className={`item center ${item.sessionId === this.state.sessionId?'act':''}`} onClick={this.vsSwitch.bind(this,item.sessionId)}>
 				                        <span>{item.items[0].name}</span>
 				                        <span style={{fontSize:'.2rem',margin:'0 5px'}}>vs</span>
 				                        <span>{item.items[1].name}</span>
@@ -429,15 +469,15 @@ class Detail extends Component {
     	var buttonText;
     	if(match.apply_people === match.activity_people){
     		buttonText = (<div className="match-btn center" style={{background:'#ddd',color:'#fff'}}>报名已满</div>);
-    	}else if((!match.apply || match.apply.length === 0 && match.apply_people != match.activity_people) && (match.model === 1)){
+    	}else if(((!match.apply || match.apply.length === 0) && (match.apply_people !== match.activity_people)) && (match.model === 1)){
     		buttonText = (
-    		    <div className="match-btn center" style={{background:'#B3261D',color:'#fff'}}>
+    		    <div className="match-btn center" style={{background:'#B3261D',color:'#fff'}} onClick={this.checkMoney.bind(this,match.apply_limit,1)}>
                     {match.apply_limit}
-                    <img className={match.apply_type != 4?'image-diamond':'image-ticket'} src={this.state.currency[match.apply_type-1]}  style={{margin:'0 .05rem'}}></img>
+                    <img className={match.apply_type !== 4?'image-diamond':'image-ticket'} src={this.state.currency[match.apply_type-1]} alt="currency" style={{margin:'0 .05rem'}}></img>
                     加入
                 </div>
     		);
-    	}else if((!match.apply || match.apply.length === 0 && match.apply_people != match.activity_people) && (match.model === 2)){
+    	}else if(((!match.apply || match.apply.length === 0) && (match.apply_people !== match.activity_people)) && (match.model === 2)){
     		buttonText = (
     		    <div className="match-btn center" style={{background:'#B3261D',color:'#fff'}}>报名</div>
     		);
@@ -449,7 +489,7 @@ class Detail extends Component {
 					<div className="time">{match.stateTimeText}</div>
 				</div>
             )
-    	}else if(match.match_status == 1){
+    	}else if(match.match_status === 1){
             return (
                 <div>
 	            	<div className="z-c-gray center">距离报名截止还有</div>
@@ -459,34 +499,34 @@ class Detail extends Component {
 	                {buttonText}
                 </div>
             );
-    	}else if(match.match_status == 2){
+    	}else if(match.match_status === 2){
             return(<span className="z-c-gray">比赛中，已截止选择阵容</span>);
-    	}else if(match.match_status == 3){
+    	}else if(match.match_status === 3){
             return(<span className="z-c-gray">比赛结束，已截止选择阵容</span>);
-    	}else if(match.match_status == 9){
+    	}else if(match.match_status === 9){
             return(<span className="z-c-gray">比赛终止</span>);
     	}
     }
     renderLineupStatus(match){
-		if(match.match_status == 0 || match.match_status == 1 && match.ceil == 0){
+		if((match.match_status === 0 || match.match_status === 1) && match.ceil === 0){
     		return (
     		    <div className="match-btn center" style={{backgroundColor:'#F3C53E',color:'#fff'}}>
 		            追加阵容{match.apply_limit}
-		            <img className={match.apply_type != 4?'image-diamond':'image-ticket'} src={this.state.currency[match.apply_type-1]}  style={{margin:'0 .05rem'}}></img>
+		            <img className={match.apply_type !== 4?'image-diamond':'image-ticket'} src={this.state.currency[match.apply_type-1]} alt="currency" style={{margin:'0 .05rem'}}></img>
 		        </div>
     		)
-    	}else if(match.match_status == 0 || match.match_status == 1 && match.ceil == 1){
+    	}else if((match.match_status === 0 || match.match_status === 1) && match.ceil === 1){
     		return (<div style={{backgroundColor:'#ddd',color:'#fff'}}>阵容已满</div>)
     	}
     }
     renderApply(match){
-    	if(match.apply && match.apply.length > 0 && match.match_status != 9){
+    	if(match.apply && match.apply.length > 0 && match.match_status !== 9){
             return(
                 <div>
 		            {   
 		            	match.apply.map((apply,index)=>{
                             return(<div key={index} className="match-btn center" style={{background:'#B3261D',color:'#fff'}}>
-		                        <Link to="/my" style={{color:'#fff',display:'block'}}>{apply.submit==1?'查看阵容':'布置阵容'}</Link>
+		                        <Link to={{pathname:'/lineup',state:{applyId:apply.id,activityId:match.id,status:match.match_status}}} style={{color:'#fff',display:'block'}}>{apply.submit===1?'查看阵容':'布置阵容'}</Link>
 		                    </div>)
 		            	})
 		            } 
@@ -496,7 +536,7 @@ class Detail extends Component {
     	}
     }
     renderContent(match){
-       if(match.match_status == 3){
+       if(match.match_status === 3){
            //比赛结束部分
 			return (
 				<div className="game-end">
@@ -506,7 +546,7 @@ class Detail extends Component {
 				            <div key={index} className="item" style={{borderTop:'none'}}>
 					            <div className="team center">
 	                                <div className="team-logo">
-	                                    <img src={item.items[0].logo} className="image-team"></img>
+	                                    <img src={item.items[0].logo} className="image-team" alt="logo"></img>
 	                                </div>
 	                                <div className="team-name">{item.items[0].name}</div>
 	                            </div>
@@ -516,7 +556,7 @@ class Detail extends Component {
 	                            </div>
 	                            <div className="team center">
 	                                <div className="team-logo">
-	                                    <img src={item.items[1].logo} className="image-team"></img>
+	                                    <img src={item.items[1].logo} className="image-team" alt="logo"></img>
 	                                </div>
 	                                <div className="team-name">{item.items[1].name}</div>
 	                            </div>
@@ -525,13 +565,13 @@ class Detail extends Component {
 				        </Carousel>
 			        </div>
 			        <div className="tab">
-			            <div className={`item ${this.state.tabIndex==0?'act':''}`} onClick={this.tabSwitch.bind(this,0)}>
+			            <div className={`item ${this.state.tabIndex===0?'act':''}`} onClick={this.tabSwitch.bind(this,0)}>
 			                <span className="label">排名</span>
 			            </div>
-			            <div className={`item ${this.state.tabIndex==1?'act':''}`} onClick={this.tabSwitch.bind(this,1)}>
+			            <div className={`item ${this.state.tabIndex===1?'act':''}`} onClick={this.tabSwitch.bind(this,1)}>
 			                <span className="label">阵容</span>
 			            </div>
-			            <div className={`item ${this.state.tabIndex==2?'act':''}`} onClick={this.tabSwitch.bind(this,2)}>
+			            <div className={`item ${this.state.tabIndex===2?'act':''}`} onClick={this.tabSwitch.bind(this,2)}>
 			                <span className="label">战报</span>	
 			            </div>
 			        </div>
@@ -554,13 +594,13 @@ class Detail extends Component {
 			                    {
 			                    	this.state.applyed.map((item,index)=>{
 			                    		if(index<15){
-			                    			return(<img key={index} src={item.head || Common.IMG_DEFAULT}></img>)
+			                    			return(<img key={index} src={item.head || Common.IMG_DEFAULT} alt="head"></img>)
 			                    		}
 			                    	})
 			                    }
 			                    <span className="center apply_number">{this.state.applyed.length}</span>
 			                </div>
-	            		    <Link to="/interaction/player" style={match.match_status == 2?{}:{display:'none'}}>
+	            		    <Link to="/interaction/player" style={match.match_status === 2?{}:{display:'none'}}>
 			                    <span className="apply-more">查看更多</span> 
 			                </Link> 
 			            </div>
@@ -568,8 +608,8 @@ class Detail extends Component {
 			        <div className="bonus">
 			            <div className="bonus-head">
 			                <span>奖金</span>
-			                <span style={{'color':match.owner_type == 1?'#F2C53D':'#29AEF5'}} className="total">{match.totals}</span>
-		                    <img className={match.owner_type!=4?'image-diamond':'image-ticket'} src={this.state.currency[match.owner_type-1]} style={{verticalAlign:match.owner_type == 3?'-2px':''}}></img>
+			                <span style={{'color':match.owner_type === 1?'#F2C53D':'#29AEF5'}} className="total">{match.totals}</span>
+		                    <img className={match.owner_type!==4?'image-diamond':'image-ticket'} alt="currency" src={this.state.currency[match.owner_type-1]} style={{verticalAlign:match.owner_type === 3?'-2px':''}}></img>
 			                <span className="text center">奖金分配</span>
 			            </div>
 			            <div className="bonus-list">
@@ -578,7 +618,7 @@ class Detail extends Component {
 	                                return (
 	                                    <div key={index} className="item">
 					                        <div className="title">{money.name}</div>
-					                        <div className="money" style={{color:match.owner_type == 1?'#F2C53D':'#29AEF5'}}>{money.money}</div>
+					                        <div className="money" style={{color:match.owner_type === 1?'#F2C53D':'#29AEF5'}}>{money.money}</div>
 					                    </div>
 	                                );
 		                    	})
@@ -598,7 +638,7 @@ class Detail extends Component {
 	                                <div key = {index} className="item">
 					                    <div className="team center">
 					                        <div className="team-logo">  
-					                           <img src={club.items[0].logo} className="image-team"></img>
+					                           <img src={club.items[0].logo} className="image-team" alt="logo"></img>
 					                        </div>
 					                        <div className="team-name">{club.items[0].name}</div>
 					                    </div>
@@ -608,7 +648,7 @@ class Detail extends Component {
 					                    </div>
 					                    <div className="team center">
 					                        <div className="team-logo">  
-					                           <img src={club.items[1].logo} className="image-team"></img>
+					                           <img src={club.items[1].logo} className="image-team" alt="logo"></img>
 					                        </div>
 					                        <div className="team-name">{club.items[1].name}</div>
 					                    </div>

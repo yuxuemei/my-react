@@ -1,0 +1,376 @@
+.player-tab{
+	background-color:#e2e2e2;
+	height:.7rem;
+	line-height:.7rem;
+	overflow-x:auto;
+	overflow-y:hidden;
+	white-space:nowrap;
+	border-bottom:1px solid #cccbcb;
+	position:fixed;
+	top:0;
+	left:50%;
+	margin-left:-3.75rem;
+	z-index:999;
+	width: 7.5rem;
+}
+.player-tab .item{
+	display:inline-block;
+	text-align:center;
+	font-size:.23rem;
+	margin:0 .2rem;
+}
+.player-tab .item.act{
+	color:#B4251D;
+}
+.lineuplist{
+  display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+}
+.lineuplist .location-tab{
+	width:1.26rem;
+	position:absolute;
+	top:.72rem;
+	left:0;
+	height:10rem;
+	z-index:999;
+}
+.lineuplist .location-tab .item {
+	background-color:#e2e2e2;
+	border-bottom:1px solid #cccbcb;
+	text-align:center;
+	font-size:.26rem;
+	color:#909098;
+	padding-top:.16rem;
+	padding-bottom:.1rem;
+}
+.lineuplist .location-tab .item.act{
+	background-color:#fff;
+}
+.lineuplist .location-tab .item .img-head {
+	width:.84rem;
+	height:.84rem;
+	margin:0 auto;
+}
+.lineuplist .location-tab .item .player_name {
+	font-size:.2rem;
+	color:#2b2031;
+}
+.lineuplist .location-tab .item .battle {
+  font-size:.18rem;
+  color:#B4251D;
+}
+.moreDot1 {
+	text-overflow:ellipsis;
+	word-wrap:normal;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.lineuplist .sort{
+	display: flex;
+	height:.62rem;
+	line-height:.62rem;
+	justify-content:center;
+	margin-left:1.36rem;
+	width:6.14rem
+}
+.lineuplist .sort div {
+	flex:1;
+	text-align:center;
+}
+.lineuplist .player-list {
+	-webkit-box-flex:1;
+	-ms-flex:1;
+	flex:1;
+	display:flex;
+	flex-wrap:wrap;
+	padding-top:.2rem;
+	border-top:1px solid #e2e2e2;
+	padding-left:1.36rem;
+	padding-bottom:1.3rem;
+}
+.sort-img {
+	width:.13rem;
+	height:.23rem;
+	vertical-align:-.02rem;
+}
+.lineuplist .player-list .item {
+	margin-top:.2rem;
+	width:1.98rem;
+	height:3.47rem;
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+	background:url(http://oslg9bt6h.bkt.clouddn.com/applet/img/card-normal.png) no-repeat;
+	background-size:100%;
+}
+.lineuplist .player-list .item.act {
+	background:url(http://oslg9bt6h.bkt.clouddn.com/applet/img/card-selected.png) no-repeat;
+	background-size:100%;
+}
+.lineup-player-head{
+	width:1.62rem;
+	height:1.62rem;
+	left:.19rem;
+	position:absolute;
+	bottom:1.15rem;
+}
+.lineuplist .player-list .item .price {
+	margin-right:.6rem;
+	font-size:.21rem;
+	top:.05rem;
+	left:.2rem;
+	color:#fff;
+	height:.4rem;
+	line-height:.4rem;
+}
+.lineuplist .player-list .item .price,.lineuplist .player-list .item .name,.lineuplist .player-list .item .team {
+	font-size:.23rem;
+	width:1.6rem;
+	text-align:center;
+}
+.lineuplist .player-list .item .power {
+	font-size:.21rem;
+	width:1.06rem;
+	text-align:center;
+	top:2.4rem;
+	left:.46rem;
+	color:#2b2031;
+}
+.lineuplist .player-list .name {
+	color:#2b2031;
+	font-size:.22rem;
+	font-weight:bold;
+	word-break:break-all;
+}
+.lineuplist .player-list .team{
+	color:#2b2031;
+	font-size:.19rem;
+	word-break:break-all;
+}
+.bottom-area {
+	height:.62rem;
+	position:fixed;
+	z-index:999;
+	bottom:0;
+	left:50%;
+	width:7.1rem;
+	margin-left: -3.75rem;
+	display:flex;
+	padding:.28rem .2rem;
+	background-color:#fff;
+	border-top:1px solid #d3d3d3;
+}
+.bottom-area .lineup-info-bottom {
+	font-size:.26rem;
+	color:#000000;
+}
+.bottom-area .clear,.bottom-area .select,.bottom-area .select-normal,.bottom-area .recommend {
+	width:1.38rem;
+	height:.62rem;
+	line-height:.62rem;
+	border-radius:.1rem;
+	text-align:center;
+}
+.bottom-area .recommend{
+	color:#fff;
+	background-color:#2A2131;
+	margin-left:.14rem;
+}
+.bottom-area .select-normal{
+	background-color:#ddd;
+	color:#fff;
+	margin-left:.18rem;
+}
+.bottom-area .select{
+	background-color:#b3251d;
+	color:#fff;
+	margin-left:.14rem;
+}
+.bottom-area .clear {
+	color:#2b2031;
+	border:.02rem solid #2b2031;
+}
+
+
+/*==================玩家详情弹框======================*/
+.player-detail{
+      width:100%;
+      height:76%;
+      background-color:#fff;
+      position:fixed;
+      bottom:0;
+      left:0;
+    }
+   .canvas{
+     width:7.5rem;
+     height: 4.5rem; 
+   }   
+   .player-close {
+      width:.34rem;
+      height:.34rem;
+      float:right;
+      margin-top:.16rem;
+      margin-right:.2rem;
+   }
+   .match-my-lineup {
+      display:flex;
+      justify-content:space-between;
+    }
+    .match-my-lineup .item {
+      width:3.66rem;
+      height:3.33rem;
+      color:#fff;
+    }
+    .select-head {
+        width:1.36rem;
+        height:1.36rem;
+        top:.68rem;
+        left:1.3rem;
+    }
+    .select-tag{
+      width:2.64rem;
+      height:.8rem;
+      margin-top:1.94rem;
+      margin-left:.64rem;
+    }
+    .match-my-lineup .item .power {
+      font-size:.2rem;
+      font-weight:bold;
+      left:.78rem;
+      top:2.22rem;
+      text-align:center;
+      width:.52rem;
+      color: #fff;
+    }
+    .match-my-lineup .item .userinfo {
+      font-size:.22rem;
+      font-weight:bold;
+      left:1.45rem;
+      top:2.1rem;
+      color: #fff;
+    }
+    .player-detail .info {
+        width:3.7rem;
+        margin-top:1rem;
+    }
+    .player-detail .info .name {
+      color:rgb(43,32,49);
+      font-size:.28rem;
+      font-weight:bold;
+    }
+    .player-detail .info .money{
+      color:#b3251d;
+    }
+    .icon-player {
+      width:.24rem;
+      height:.3rem;
+    }
+    .info-data img{
+      vertical-align:-.06rem;
+      margin-right:.14rem;
+    }
+    .info-data div{
+      margin-bottom:.2rem;
+      color:rgb(144,146,184);
+      min-width:1.1rem;
+    }
+    .info-data {
+      display:flex;
+      flex-wrap:wrap;
+      margin-top:.32rem;
+    }
+    .detail_bar {
+      height:.6rem;
+      line-height:.6rem;
+      background-color:rgb(232,232,232);
+      display:flex;
+      text-align:center;
+      justify-content:space-around;
+    }
+    .detail_bar .act{
+      color:#b3251d;
+      border-bottom:.02rem solid #b3251d;
+    }
+    .bottom-btn{
+      border-top:1px solid #ddd;
+    }
+    .select-btn {
+      background:rgb(179,38,29);
+      color:#fff;
+      height:.72rem;
+      line-height:.72rem;
+      font-size:.3rem;
+      border-radius:.1rem;
+      margin:.2rem .4rem;
+   }
+   .player-detail .chart,.player-detail .lineuplist-data,.container {
+      height:4.5rem;
+    }
+  .container {
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+    -webkit-text-size-adjust:none;
+    -webkit-user-select:none;
+    font-size:.35rem;
+    color:#333;
+    font-family:Helvetica,Arial,"Helvetica Neue","Droid Sans","Microsoft YaHei",sans-serif;
+  }
+  .player-detail .chart {
+    padding-top:.5rem;
+  }
+  .select-img{
+  	width:.54rem;
+	height:.58rem;
+	right:-.05rem;
+	bottom:.55rem;
+  }
+  .list-data{
+  	    height: 5rem;
+  }
+  .popup-list{
+    height:.6rem;
+    padding-left:.12rem;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    align-items: center;
+    
+  }
+  .popup-list-top{
+    height:.6rem;
+    width:25%;
+    flex-shrink:0;
+    text-align:center;
+    font-size:.22rem;
+    color:rgb(102,102,102);
+    border-bottom:1px solid rgb(232,232,232);
+    line-height:.6rem;
+  }
+  .popup-list-content{
+    min-height:.6rem;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    align-items: center;
+  }
+  .popup-list-content-block{
+    width:25%;
+    flex-shrink:0;
+    font-size:.22rem;
+    color:rgb(102,102,102);
+    text-align:center;
+    word-wrap: break-word;
+  }
+
+ /*==================玩家详情弹框======================*/
+
+
+
+
+

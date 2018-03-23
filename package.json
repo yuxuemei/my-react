@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "axios": "^0.18.0",
-    "babel-plugin-import": "^1.6.7"
+    "babel-plugin-import": "^1.6.7",
+    "echarts": "^4.0.4"
   }
 }

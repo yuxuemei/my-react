@@ -35,6 +35,7 @@ class My extends Component {
     componentDidMount(){
         this.getHonorNumber();
         this.getExpand();
+        Common.getUserInfo();
     }
     getHonorNumber(){
         Common.get({
@@ -71,18 +72,18 @@ class My extends Component {
                 <div className="my-top">
                     <Link to="/edit">
                       <div className="my-top-head">
-                          <img src={user.head || Common.IMG_DEFAULT}></img>
+                          <img src={user.head || Common.IMG_DEFAULT} alt="head"></img>
                       </div>
                     </Link>
                     <div className="my-top-right">
                         <div className="dsac" style={{marginLeft: '.13rem'}}>
                             <div className="my-top-name">{user.nickname}</div>
-                            <img src={user.sex==1?'http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-sexw.png':'http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-sexm.png'} className="img-sex"></img>
+                            <img src={user.sex===1?'http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-sexw.png':'http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-sexm.png'} alt="sex" className="img-sex"></img>
                         </div>
                         <div className="dsac" style={{marginTop:'.1rem',height: '.4rem'}}>
                             <div className="dsac">
                                 <Link to="/record/2">
-                                    <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-1.png"></img>
+                                    <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-1.png" alt="my-icon-1"></img>
                                 </Link>
                                 <Link to="/recharge" >
                                     <div className="my-money-number">
@@ -95,7 +96,7 @@ class My extends Component {
                             </div>
                             <div className="dsac" style={{marginLeft: '.3rem'}}>
                                 <Link to="/record/4">
-                                    <img className="my-money-icon" style={{marginRight: '.08rem'}} src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-2.png"></img>
+                                    <img className="my-money-icon" style={{marginRight: '.08rem'}} src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-2.png" alt="my-icon-2"></img>
                                 </Link>
                                 <div className="my-money-number">
                                     <div className="number-box">
@@ -106,7 +107,7 @@ class My extends Component {
                             </div>
                             <div className="dsac" style={{marginLeft: '.3rem'}}>
                                 <Link to="/record/3">
-                                    <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-3.png"></img>
+                                    <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-3.png" alt="my-icon-3"></img>
                                 </Link>
                                 <a className="my-money-number" href="user.duiba_url">
                                     <div className="number-box">
@@ -120,7 +121,7 @@ class My extends Component {
                     <Link to="/edit">
                         <div className="top-edit absolute">
                             <span className="top-edit-text">编辑资料</span>
-                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_06.png" style={{width:'.19rem',height:'.19rem',marginLeft: '.05rem'}}></img>
+                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_06.png" alt="icon1_06d" style={{width:'.19rem',height:'.19rem',marginLeft: '.05rem'}}></img>
                         </div>
                     </Link>
                 </div>
@@ -131,7 +132,7 @@ class My extends Component {
                                 return (
                                     <Link key={index} to="menu.url">
                                         <div>
-                                            <img src={menu.img} className="top-img"></img>
+                                            <img src={menu.img} className="top-img" alt="top-img"></img>
                                         </div>
                                         <div className="top-text center"><span>{menu.name}</span></div>
                                     </Link>
@@ -156,43 +157,43 @@ class My extends Component {
                 <Link to="/news">
                     <div className="my-block2">
                         <div className="dsac">
-                            <img className="block2-img" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-8.png"></img>
+                            <img className="block2-img" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-8.png" alt="block2-img"></img>
                             <div className="block2-text">我的消息</div>
                         </div>
                         <div className="dsac my-block2-right">
                             <div className="my-block2-right-text">戳我查看</div>
                             <div className="little-dot" v-if="user.count > 0"></div>
-                            <img className="my-block2-right-icon" style={{marginleft: '.1rem'}} src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"></img>
+                            <img className="my-block2-right-icon" style={{marginleft: '.1rem'}} alt="arrow-03" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"></img>
                         </div>
                     </div>
                 </Link>
                 <div className="my-block3">
                     <Link to="/changepaws" className="my-block3-list relative">
                         <div className="list-icon absolute">
-                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-10.png"></img>
+                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-10.png" alt="my-icon-10" ></img>
                         </div>
                         <div className="list-block" style={{borderBottom:'1px solid #f5f5f5'}}>
                             <div className="block2-text">修改密码</div>
                             <div className="dsac my-block2-right">
-                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"></img>
+                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"  alt="my-icon-10"></img>
                             </div>
                         </div>
                     </Link>
                     <Link to="/aboutus" className="my-block3-list relative">
                         <div className="list-icon absolute">
-                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-11.png"></img>
+                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-11.png"  alt="my-icon-11"></img>
                         </div>
                         <div className="list-block">
                             <div className="block2-text">关于我们</div>
                             <div className="dsac my-block2-right">
-                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"></img>
+                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" alt="arrow-03"></img>
                             </div>
                         </div>
                     </Link>
                 </div>
                 <div className="my-block4">
                     <div className="my-block3-list relative">
-                        <img className="list-icon absolute" src={require('./../images/my-icon-1.png')}></img>
+                        <img className="list-icon absolute" src={require('./../images/my-icon-1.png')} alt="my-icon-1"></img>
                         <div className="list-block">
                             <div className="block2-text">我的红包收益</div>
                             <div className="dsac my-block2-right">
@@ -219,7 +220,7 @@ class My extends Component {
                                     <div className="my-earnings-text">钻石转换比例 <span style={{color:'#6d66c0'}}>{this.state.expandOld.money_to_diamonds}</span></div>
                                     <div className="my-earnings-text2 dsac">
                                         <span style={{fontSize:'.26rem'}}>立即转到钻石</span>
-                                        <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="img-arrow"></img>
+                                        <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="img-arrow" alt="icon1_arrow"></img>
                                     </div>
                                 </div>
                             </div>

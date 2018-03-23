@@ -65,7 +65,7 @@ class Home extends Component {
 	    Common.get({
 	        url:'/apivtwo/games/sortinfo?games_id='+this.state.gameId
 	    }).then(respose=>{
-	        var num = 0;
+	        let num = 0;
 	        if(respose.gamesType.exist){
 	            num = respose.gamesType.exist.length;
 	        }else{
@@ -73,7 +73,7 @@ class Home extends Component {
 	        	respose.gamesType.exist = [];
 	        }
 	        if(respose.gamesType.nonexist){
-	            num += parseInt(respose.gamesType.nonexist.length);
+	            num += parseInt(respose.gamesType.nonexist.length,10);
 	        }else{
 	        	//避免nonexist不存在时map报错
 	        	respose.gamesType.nonexist = [];
@@ -85,7 +85,7 @@ class Home extends Component {
 	    })
 	}
     showTopMatch(id){
-        if(this.state.gameId == id  && this.state.classIsShow){
+        if(this.state.gameId === id  && this.state.classIsShow){
       		this.setState({
 				classIsShow:!this.state.classIsShow,
 				gameId:''
@@ -102,7 +102,7 @@ class Home extends Component {
     }
     renderChild(id) { // 如果这里有多行，推荐用这种方法
     	var gameClassifyChild = this.state.gameClassifyChild;
-	    if ((this.state.classIsShow && this.state.gameId == id) && (this.state.childLength>0)){
+	    if ((this.state.classIsShow && this.state.gameId === id) && (this.state.childLength>0)){
 	    	return(
                 <div className="class-controller">
                     <div className="top-game">
@@ -110,16 +110,16 @@ class Home extends Component {
                     	gameClassifyChild.competitions.map((competition,idx)=>{
                             return (
 								<div key={idx} className="relative">
-		                            <img className="icon-hot absolute" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon_hot.png"></img>
+		                            <img className="icon-hot absolute" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon_hot.png" alt="icon_hot"></img>
 		                            <Link className="top-item" to={{pathname:`/interactiondetail/${competition.id}`}}>
 		                                <div>
 		                                <span className="dot"></span><span>{competition.title}</span>
-		                                { competition.apply == 1 ?<span className="apply center">已参加</span>:''}
+		                                { competition.apply === 1 ?<span className="apply center">已参加</span>:''}
 		                                </div>
 		                                <div>
 		                                    <div className="totals">
 		                                        {competition.totals}
-		                                        <img src={this.state.curreny[competition.reward_type-2]} className="crystal-header"></img>
+		                                        <img src={this.state.curreny[competition.reward_type-2]} className="crystal-header" alt="curreny"></img>
 		                                    </div>
 		                                    <div className="totals-title text-right">奖金总额</div>
 		                                </div>
@@ -135,7 +135,7 @@ class Home extends Component {
                                 return (
                                     <Link key={index} className="top-item exist" to={`interaction/${sort.id}`}>
 		                                <div><span className="dot"></span><span>{sort.name}</span></div>
-		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="arrow-03"/></div>
+		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow.png" className="arrow-03" alt="arrow"/></div>
 		                            </Link>
                                 )
                             })
@@ -145,7 +145,7 @@ class Home extends Component {
                                 return (
                                     <div key={index} className="top-item">
 		                                <div><span className="dot nonexist"></span><span>{sort.name}</span></div>
-		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow_grey.png" className="arrow-03"/></div>
+		                                <div><img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/icon1_arrow_grey.png" className="arrow-03" alt="arrow"/></div>
 		                            </div>
                                 )
                             })
@@ -182,15 +182,15 @@ class Home extends Component {
 			        <Slider items={this.state.banner} speed={1} delay={3} pause={true} autoplay={true} dots={true} arrows={false} />
 			    </div>
 			    <Link className="enterMate relative" to={user.uid?'/mate':'/login'}>
-		           <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/mate.png" className="image-mate"></img>
+		           <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/mate.png" className="image-mate" alt="mate"></img>
 		           <span className="absolute mate-number">{this.state.mateNumber}人正在匹配...</span>
 		        </Link>
 		        <div className="home-classify">
 		           {
                         state.gameClassify.map((item,index)=>{
                             return (
-								<div key={index} className={`item ${(state.gameId == item.id) && (state.childLength>0) ? 'act' : ''}`} 
-								 style={{'backgroundImage':'url('+((state.gameId==item.id) && (state.childLength>0)?item.miniapp_bg2:item.miniapp_bg1)+')','height':((state.gameId== item.id) && (state.childLength>0))?'':'1.5rem'}}>
+								<div key={index} className={`item ${(state.gameId === item.id) && (state.childLength>0) ? 'act' : ''}`} 
+								 style={{'backgroundImage':'url('+((state.gameId===item.id) && (state.childLength>0)?item.miniapp_bg2:item.miniapp_bg1)+')','height':((state.gameId === item.id) && (state.childLength>0))?'':'1.5rem'}}>
 					                <div className="class-big relative" onClick={this.showTopMatch.bind(this,item.id)}>
 					                    <div className="absolute classify-info">
 					                        <span>{item.competitionNum || 0}个房间</span>

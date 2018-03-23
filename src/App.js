@@ -5,11 +5,9 @@ import { Router,Route } from 'react-router-dom'
 //import ToggleButton  from './toggleButton';
 //import Boo  from './boo';
 //import Foo  from './foo';
-// 引入公共js 
-import Common from './common.js';
 
 //引入store
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './redux/store.js'
 
 // 引入样式文件
@@ -22,8 +20,11 @@ import Home from './page/home.js'
 import Guess from './page/guess.js'
 import Interaction from './page/interaction.js'
 import Detail from './page/detail.js'
+import Lineup from './page/lineup.js'
 import Plan from './page/plan.js'
 import My from './page/my.js'
+import Edit from './page/edit.js'
+import Ref from './page/ref.js'
 import Detai from './page/detai.js'
 import Login from './page/login.js'
 import Recharge from './page/recharge.js'
@@ -133,8 +134,11 @@ class App extends Component {
                   <Route path="/guess" component={Guess}/>
                   <Route path="/interaction/:id" component={Interaction}/>
                   <Route path="/interactiondetail/:id" component={Detail}/>
+                  <Route path="/lineup" component={Lineup}/>
                   <Route path="/plan" component={Plan}/>
                   <Route path="/my" component={My}/>
+                  <Route path="/edit" component={Edit}/>
+                  <Route path="/ref" component={Ref}/>
                   <Route path="/test" component={TestRouter}/>
                   <Route path="/detail/:id" component={Detai}/>
                   <Route path="/login" component={Login}/>

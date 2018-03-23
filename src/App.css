@@ -363,3 +363,6 @@ html,body{
   border-bottom: .01rem solid #ececec;
 }
 /*----------底部选择弹出框css---------------*/
+.am-toast-text-info{
+  color: #fff;
+}
