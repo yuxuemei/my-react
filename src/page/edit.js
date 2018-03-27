@@ -52,7 +52,6 @@ class Edit extends Component {
     updateHead(e){
         let file = e.target.files[0];
         if(file){
-            let d = new Date();
             //let type = file.name.split('.');
             let param = new FormData(); //创建form对象
             //param.append('chunk','0');//断点传输
@@ -122,11 +121,11 @@ class Edit extends Component {
         let user = this.props.data.user;
         let setHtml;
         if(user.sex === 0){
-            setHtml = (<span className="edit-right" v-if="">保密</span>);
+            setHtml = (<span className="edit-right">保密</span>);
         }else if(user.sex === 1){
-            setHtml = (<span className="edit-right" v-if="">男</span>);
+            setHtml = (<span className="edit-right">男</span>);
         }else if(user.sex === 2){
-            setHtml = (<span className="edit-right" v-if="">女</span>);
+            setHtml = (<span className="edit-right">女</span>);
         }
 
         const CustomChildren = ({ extra, onClick, children }) => (
@@ -136,7 +135,7 @@ class Edit extends Component {
                    <div className="picker edit-right">
                        {extra}
                    </div>
-                   <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" className="edit-right-icon" alt="arrow-03"></img>
+                   <img src={Common.ARROW_03} className="edit-right-icon" alt="arrow-03"></img>
                 </div>
            </div>
         );
@@ -158,7 +157,7 @@ class Edit extends Component {
                             <div className="text">昵称</div>
                             <div className="dsac">
                                 <span className="edit-right">{user.nickname}</span>
-                                <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" className="edit-right-icon" alt="arrow-03"></img>
+                                <img src={Common.ARROW_03} className="edit-right-icon" alt="arrow-03"></img>
                             </div>
                         </div>
                     </Link>
@@ -167,7 +166,7 @@ class Edit extends Component {
                             <div className="text">邮箱</div>
                             <div className="dsac">
                                 <span className="edit-right">{user.email  || "未填写"}</span>
-                                <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" className="edit-right-icon" alt="arrow-03"></img>
+                                <img src={Common.ARROW_03} className="edit-right-icon" alt="arrow-03"></img>
                             </div>
                         </div>
                     </Link>
@@ -175,7 +174,7 @@ class Edit extends Component {
                         <div className="text">性别</div>
                         <div className="dsac">
                             {setHtml}
-                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" className="edit-right-icon" alt="arrow-03"></img>
+                            <img src={Common.ARROW_03} className="edit-right-icon" alt="arrow-03"></img>
                         </div>
                     </div>
                     <DatePicker mode="date" value={this.state.submitDate} onOk={this.handleChange.bind(this)} minDate={this.state.minDate} maxDate={this.state.maxDate} >
@@ -186,7 +185,7 @@ class Edit extends Component {
                         <div className="text">邀请码</div>
                         <div className="dsac">
                             <span className="edit-right">{user.fromcode || "未填写"}</span>
-                            <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" className="edit-right-icon" alt="arrow-03"></img>
+                            <img src={Common.ARROW_03} className="edit-right-icon" alt="arrow-03"></img>
                         </div>
                     </div>
                 </div>

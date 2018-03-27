@@ -49,9 +49,8 @@ class Lineup extends Component {
             orders:"ASC", //ASC or DESC
             all:"",
             scrollTop:0,
-            lineup:{
-                battle:[]
-            },
+            battle_Money:'',
+            player_money:'',
             battle:[],
             battleMoney: ''//剩余工资
         }
@@ -95,7 +94,8 @@ class Lineup extends Component {
                 }
             }
             this.setState({
-                lineup : respose,
+                battle_money:respose.battle_money,
+                player_money:respose.player_money,
                 battle:respose.battle,
                 initBattle : respose.battle,
                 initPower : totalNumber.toFixed(2),
@@ -193,7 +193,7 @@ class Lineup extends Component {
     }
     getApplyData(callback){
         var applyId =this.state.applyId;
-        if(applyId.indexOf("*")!==-1){
+        if(applyId.includes("*")){
             applyId = applyId.split("*")[0]
         }
         this.get({
@@ -202,7 +202,6 @@ class Lineup extends Component {
                 apply_id: applyId,
             },
         }).then(respose=>{
-            var lineup = {};
             var len = respose.length;
             this.setState({
                 searchLineupLen:len
@@ -224,16 +223,12 @@ class Lineup extends Component {
                         selectedLen++;
                     }
                 }
-                lineup.battle = respose;
-                lineup.battle_money = this.allMoney;
-                lineup.player_money = priceMoney;
                 this.setState({
-                    lineup : lineup,
-                    battle:lineup.battle,
-                    initBattle : lineup.battle,
+                    battle:respose,
+                    initBattle : respose,
                     initPower : totalNumber.toFixed(2),
-                    initPrice : lineup.battle_money-lineup.player_money,
-                    battleMoney : lineup.battle_money-lineup.player_money,
+                    initPrice : this.allMoney-priceMoney,
+                    battleMoney : this.allMoney-priceMoney,
                     locationId : locationId,
                     selectedLen : selectedLen,
                     totalNumber : totalNumber.toFixed(2)
@@ -258,7 +253,6 @@ class Lineup extends Component {
                 c_id:parseInt(this.state.activityId,10)
             },
         }).then(respose=>{
-            var lineup = this.state.lineup;
             var totalNumber  = 0;
             var money = 0;
             var selectedLen = 0;
@@ -271,12 +265,10 @@ class Lineup extends Component {
                         selectedLen++;
                     }
                 })
-                lineup.battle = respose;
                 var locationId = respose[0].location_id;
                 this.setState({
-                    lineup : lineup,
-                    battle:lineup.battle,
-                    initBattle : lineup.battle,
+                    battle:respose,
+                    initBattle : respose,
                     initPower : 0,
                     initPrice : this.state.allMoney,
                     battleMoney : this.state.allMoney-money,
@@ -297,7 +289,6 @@ class Lineup extends Component {
             },
         }).then(respose=>{
             // 计算总战斗力
-            var lineup = {};
             var locationId =  respose[1][0].id;
             var all="";
             var len = respose[0].length;
@@ -309,18 +300,14 @@ class Lineup extends Component {
                 }
             } 
             this.all = all;
-            lineup.battle = respose[1];
-            lineup.battle_money = this.state.allMoney;
-            lineup.player_money = 0;
             if(this.searchLineupLen === 0){
                 this.setState({
                     clubs:respose[0],
-                    lineup : lineup,
-                    battle:lineup.battle,
-                    initBattle : lineup.battle,
+                    battle:respose[1],
+                    initBattle : respose[1],
                     initPower : 0,
                     initPrice : this.state.allMoney,
-                    battleMoney : lineup.battle_money-lineup.player_money,
+                    battleMoney : this.state.allMoney-0,
                     locationId : locationId
                 })
             }else{
@@ -411,13 +398,12 @@ class Lineup extends Component {
     }
     // 智能推荐
     recommendLineup() {
-        var lineup = this.state.lineup;
         var activityId =this.state.activityId.toString();
         var applyId =this.state.applyId.toString();
-        if(activityId.indexOf("*")!==-1){
+        if(activityId.includes("*")){
             activityId = activityId.split("*")[0]
         }
-        if(applyId.indexOf("*")!==-1){
+        if(applyId.includes("*")){
             applyId = applyId.split("*")[0]
         }
         Common.get({
@@ -435,13 +421,11 @@ class Lineup extends Component {
             for (let i = 0; i < teamNum; i++) {
                 totalNumber += Number(battle[i].power) || 0;
             }
-            lineup.battle = battle;
-            lineup.battle_money = respose.battle_money;
-            lineup.player_money = respose.player_money;
             this.setState({
-                lineup:lineup,
-                battle:lineup.battle,
-                battleMoney:lineup.battle_money-lineup.player_money,
+                battle:battle,
+                battle_money:respose.battle_money,
+                player_money:respose.player_money,
+                battleMoney:respose.battle_money-respose.player_money,
                 totalNumber:totalNumber.toFixed(2),
                 selectedLen:teamNum
             })
@@ -490,7 +474,7 @@ class Lineup extends Component {
         }
         var isRepeat = this.isRepeat(playerIds);
         if(isRepeat){
-            this.confirm("老板，一个队员只能打一个位置！");
+            Common.fail("老板，一个队员只能打一个位置！");
         }else{
             Common.post({
                 type: 'POST',
@@ -500,7 +484,7 @@ class Lineup extends Component {
                     data: JSON.stringify(data)
                 },
             }).then(respose=>{
-                this.confirm("阵容配置成功！");
+                Common.success("阵容配置成功！");
                 setTimeout(() => {
                     this.props.history.goBack();
                 },500);
@@ -509,7 +493,6 @@ class Lineup extends Component {
     }
     saveLineupMate(type){
         var battle = this.state.battle;
-        var lineup = this.state.lineup;
         var data = [];
         var battleLen = battle.length;
         for (let i = 0; i < battleLen; i++) {
@@ -520,15 +503,15 @@ class Lineup extends Component {
         }
         if(this.state.battleMoney){
             if(this.state.battleMoney<0){
-                this.confirm("工资上限最多2000万！");
+                Common.fail("工资上限最多2000万！");
             }else{
                 this.submitFun(type,data);
             }
         }else{
-            if(lineup.battle_money-lineup.player_money>=0){
+            if(this.battle_money-this.player_money>=0){
                 this.submitFun(type,data);
             }else{
-                this.confirm("工资上限最多2000万！");
+                Common.fail("工资上限最多2000万！");
             }
         }
     }
@@ -548,7 +531,7 @@ class Lineup extends Component {
         }
         var isRepeat = this.isRepeat(players);
         if(isRepeat){
-            this.confirm("老板，一个队员只能打一个位置！");
+             Common.fail("老板，一个队员只能打一个位置！");
         }else{
             Common.post({
                 url: '/apivtwo/vtwo/savelineup',
@@ -720,9 +703,9 @@ class Lineup extends Component {
         var locationId = this.state.locationId;
         //位置id索引
         var locationIndex = this.state.locationIndex;
-        var lineup = this.state.lineup;
+        var battle = this.state.battle;
         var playerLen = players.length;
-        var obj = lineup.battle[locationIndex];
+        var obj = battle[locationIndex];
         for (let i = 0; i < playerLen; i++) {
             if (players[i].id === id) {
                 players[i].act = true;
@@ -737,9 +720,8 @@ class Lineup extends Component {
             }
         }
         
-        var battleMoney = lineup.battle_money;
+        var battleMoney = this.battle_money;
         var totalNumber = 0;
-        var battle = this.state.battle;
         var teamNum = battle.length;
         var selectedLen = 0;
         var battleLen = battle.length;
@@ -1114,7 +1096,7 @@ class Lineup extends Component {
                     <div style={{width:'3rem'}}>
                         <div className="lineup-info-bottom">阵容总战力：{this.state.totalNumber}</div>
                         <div className="lineup-info-bottom">可用工资：
-                            <span style={{color:'#da5c34'}}>￥{this.state.battleMoney !== undefined?this.state.battleMoney:((this.state.lineup.battle_money - this.state.lineup.player_money) || 0)}万</span>
+                            <span style={{color:'#da5c34'}}>￥{this.state.battleMoney !== undefined?this.state.battleMoney:((this.state.battle_money - this.state.player_money) || 0)}万</span>
                         </div>
                     </div>
                     {operaButton}

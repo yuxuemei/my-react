@@ -163,7 +163,7 @@ class My extends Component {
                         <div className="dsac my-block2-right">
                             <div className="my-block2-right-text">戳我查看</div>
                             <div className="little-dot" v-if="user.count > 0"></div>
-                            <img className="my-block2-right-icon" style={{marginleft: '.1rem'}} alt="arrow-03" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"></img>
+                            <img className="my-block2-right-icon" style={{marginLeft: '.1rem'}} alt="arrow-03" src={Common.ARROW_03}></img>
                         </div>
                     </div>
                 </Link>
@@ -175,7 +175,7 @@ class My extends Component {
                         <div className="list-block" style={{borderBottom:'1px solid #f5f5f5'}}>
                             <div className="block2-text">修改密码</div>
                             <div className="dsac my-block2-right">
-                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png"  alt="my-icon-10"></img>
+                                <img className="my-block2-right-icon" src={Common.ARROW_03}  alt="my-icon-10"></img>
                             </div>
                         </div>
                     </Link>
@@ -186,7 +186,7 @@ class My extends Component {
                         <div className="list-block">
                             <div className="block2-text">关于我们</div>
                             <div className="dsac my-block2-right">
-                                <img className="my-block2-right-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png" alt="arrow-03"></img>
+                                <img className="my-block2-right-icon" src={Common.ARROW_03} alt="arrow-03"></img>
                             </div>
                         </div>
                     </Link>

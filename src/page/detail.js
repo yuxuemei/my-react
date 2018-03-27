@@ -201,7 +201,7 @@ class Detail extends Component {
 		            }).then(res=>{
 		            	//报名成功之后重新获取货币信息
                         Common.getUserInfo(()=>{
-                        	this.confirm("成功");
+                        	Common.cuccess("成功");
 	                        this.getMatchDetail(this.state.id);
 	                        this.getApply(this.state.id);
 	                        //报名成功并且金额足够时直接跳转到阵容配置页
@@ -216,7 +216,7 @@ class Detail extends Component {
                         });
 		            })
                 } else {
-                    this.confirm('老板，您的门票不够，需要兑换'+(parseInt(respose.apply_apply_limit[0],10)-respose.money)+'门票,为您打开兑换页面！');
+                    Common.fail('老板，您的门票不够，需要兑换'+(parseInt(respose.apply_apply_limit[0],10)-respose.money)+'门票,为您打开兑换页面！');
                 }
             }
         })
@@ -459,7 +459,6 @@ class Detail extends Component {
 		                		)
 		                	})
 		                }
-			            
 		            </div>
 		        </div>
             )

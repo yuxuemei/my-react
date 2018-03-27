@@ -17,35 +17,7 @@ if(localStorage.userinfo){
 var Common = {
     CURRECY:[require('./images/gold.png'),require('./images/diamond.png'),require('./images/crystal.png'),require('./images/ticket.png')],
     IMG_DEFAULT : "http://oslg9bt6h.bkt.clouddn.com/default-img1.png",
-	//公共get请求函数
-    /*get (obj){
-    	return new Promise((resolve, reject)=>{
-            fetch(Common.baseUrl+obj.url, {
-			    method: 'GET'
-			}).then((res)=>{
-				console.log(1);
-				console.log(res);
-				return res.text()
-			}).then((res)=>{
-				console.log(2);
-				console.log(res);
-			    resolve(res);
-			}).catch(error=>{
-                console.log(3);
-				console.log(error)
-				if (error.response) {
-                    // 请求已发出，但服务器响应的状态码不在 2xx 范围内
-                    if(error.response.data.info){
-                        if(obj.popupInfo == false){ //我使用弹框显示错误信息
-                            reject(error.response);
-                        }else{
-                            Common.errMessage(error.response.data.info);
-                        }
-                    }
-                }
-			})
-        });
-    }*/
+    ARROW_03:"http://oslg9bt6h.bkt.clouddn.com/applet/img/arrow-03.png",
     get(obj){
     	return new Promise((resolve, reject)=>{
             axios.get(obj.url,{

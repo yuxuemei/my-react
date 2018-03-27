@@ -6,7 +6,7 @@ class Detai extends Component {
         super(props);
         // 根据路由 id 跟 store 做过滤
         var arr1= this.props.data.planlist.filter((ele)=>{  
-            return ele.id === parseInt(this.props.match.params.id);  
+            return ele.id === parseInt(this.props.match.params.id,10);  
         })  
         this.state = {
             plan:arr1[0]

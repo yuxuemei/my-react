@@ -2,7 +2,6 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import store from './../redux/store.js';
 import Common from './../common.js'
-import { DatePicker } from 'antd-mobile';
 
 //引入定义的action
 import { user } from './../actions/plan.js'
@@ -24,12 +23,12 @@ class Ref extends Component {
     updateRef(){
        localStorage.userinfo = JSON.stringify(this.state.user);
        store.dispatch(user(this.state.user));
-       if(this.state.type == "fromcode"){
-            if(this.state.user.fromcode && this.state.user.fromcode.length>0 && this.state.user.fromcode.length != 8){
+       if(this.state.type === "fromcode"){
+            if(this.state.user.fromcode && this.state.user.fromcode.length>0 && this.state.user.fromcode.length !== 8){
                 Common.fail("邀请码长度为8位数");
                 return;
             }
-       }else if(this.state.type == "email"){
+       }else if(this.state.type === "email"){
             if(this.state.user.email){
                 if(!this.isEmail(this.state.user.email)){
                     Common.fail("输入正确的邮箱地址！");
@@ -47,11 +46,11 @@ class Ref extends Component {
     handleChange(e){
         let value = e.target.value;
         var user = this.state.user;
-        if(this.state.type == "email"){
+        if(this.state.type === "email"){
             user.email = value;
-        }else if(this.state.type == "nickname"){
+        }else if(this.state.type === "nickname"){
             user.nickname = value;
-        }else if(this.state.type == "fromcode"){
+        }else if(this.state.type === "fromcode"){
             user.fromcode = value;
         }
         this.setState({
