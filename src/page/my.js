@@ -65,6 +65,9 @@ class My extends Component {
             })
         })
     }
+    enterMall(){
+        Common.fail("请关注'竞联赛'公众号点击底部菜单'兑换商城'进行兑换");
+    }
 	render(){
         var user = this.props.data.user;
 		return (
@@ -82,7 +85,7 @@ class My extends Component {
                         </div>
                         <div className="dsac" style={{marginTop:'.1rem',height: '.4rem'}}>
                             <div className="dsac">
-                                <Link to="/record/2">
+                                <Link to={{pathname:'/record',state:{type:2}}}>
                                     <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-1.png" alt="my-icon-1"></img>
                                 </Link>
                                 <Link to="/recharge" >
@@ -95,7 +98,7 @@ class My extends Component {
                                 </Link>
                             </div>
                             <div className="dsac" style={{marginLeft: '.3rem'}}>
-                                <Link to="/record/4">
+                                <Link to={{pathname:'/record',state:{type:4}}}>
                                     <img className="my-money-icon" style={{marginRight: '.08rem'}} src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-2.png" alt="my-icon-2"></img>
                                 </Link>
                                 <div className="my-money-number">
@@ -106,15 +109,15 @@ class My extends Component {
                                 </div>
                             </div>
                             <div className="dsac" style={{marginLeft: '.3rem'}}>
-                                <Link to="/record/3">
+                                <Link to={{pathname:'/record',state:{type:3}}}>
                                     <img className="my-money-icon" src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-3.png" alt="my-icon-3"></img>
                                 </Link>
-                                <a className="my-money-number" href="user.duiba_url">
+                                <div className="my-money-number" onClick={this.enterMall.bind(this)}>
                                     <div className="number-box">
                                         <span>{Common.formatNumber(user.crystal)}</span>
                                     </div>
                                     <div className="number-right absolute">换</div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>

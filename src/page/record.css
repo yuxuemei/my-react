@@ -1,0 +1,35 @@
+.record-list .item {
+  padding: .2rem;
+  padding-bottom: .1rem;
+  border-bottom: 1px solid #e2e2e2; 
+}
+.record-list .item .row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: .1rem; 
+}
+.record-list .item .title {
+    color: #000; 
+}
+.record-list .item .title, .record-list .item .text{
+    -webkit-box-flex:1;
+    -ms-flex:1;
+    flex:1;
+    display:block;
+}
+.record-list .item .currency-num {
+    color: #16B0E6;
+}
+.record-list .item .type {
+    padding: .1rem;
+    border: 1px solid #e2e2e2;
+    text-align: center;
+    border-radius: .03rem; 
+}
+.record-list .page-infinite-loading{
+  padding:.2rem 0;
+}

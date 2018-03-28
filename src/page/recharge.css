@@ -1,0 +1,238 @@
+
+.retop{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:.72rem;
+  background-color:rgb(245,245,245);
+  z-index:3;
+}
+.retop-box{
+  padding-left:.28rem;
+  padding-right:.28rem;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+}
+.dsac{
+  display: flex;
+  align-items: center;
+}
+.dsajc{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.retop-box .my-money{
+  color:#2a2131;
+}
+.retop-box .my-money-icon{
+  width:.33rem;
+  height:.40rem;
+  margin-left:.10rem;
+}
+.retop-box .my-money-icon img{
+  width:100%;
+  height:100%;
+ }
+ .retop-btn{
+  margin-top:.05rem;
+  width:1.12rem;
+  height:.48rem;
+  background: url('http://oslg9bt6h.bkt.clouddn.com/applet/img/cz-icon02.png') no-repeat; 
+  background-size: 100% 100%;
+  color:#ffffff;
+  font-weight: bold;
+  text-align:center;
+ }
+ .reposter{
+  width: 100%;
+  background-color:#ffffff;
+  margin-top:.72rem;
+  padding-top:.30rem;
+  position: relative;
+ }
+
+.slide-box{
+  width:7.50rem;
+  height:2.80rem;
+ }
+ .slide-image{
+  /*width:636rem;*/
+  height:2.30rem;
+  border-radius:.20rem;
+  /*margin-left:62rem;
+  margin-right:auto;*/
+ }
+ .left-block,.right-block{
+    width:.35rem;
+    height:1.90rem;
+    position:absolute;
+    left:0;
+    top:.50rem;
+    background-color: rgb(206,198,230);
+    border-top-right-radius:.20rem;
+    border-bottom-right-radius:.20rem;
+ }
+.left-block{
+  left:0;
+ }
+ .right-block{
+  right:0;
+ }
+ .remoney{
+  margin-top:.30rem;
+  margin-left:.48rem;
+  margin-right:.48rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+ }
+ .remoney .box{
+  width: 2.12rem;
+  height:2.37rem;
+  margin-bottom:.12rem;
+  position: relative;
+ }
+
+.rethone{
+  background:url('http://oslg9bt6h.bkt.clouddn.com/applet/img/cz-bg02.png') no-repeat;
+  background-size:100% 100%;
+}
+.rethtwo{
+  background:url('http://oslg9bt6h.bkt.clouddn.com/applet/img/cz-bg01.png') no-repeat;
+  background-size:100% 100%;
+}
+
+@keyframes anima1{
+    0%{    
+      transform:rotate(0deg);
+      -webkit-transform:rotate(0deg);
+    }
+    50%{
+      transform:rotate(180deg);
+      -webkit-transform:rotate(180deg);      
+    }    
+    100%{    
+      transform:rotate(360deg);
+      -webkit-transform:rotate(360deg);
+    }
+}
+@-webkit-keyframes anima1{
+    0%{    
+      transform:rotate(0deg);
+      -webkit-transform:rotate(0deg);
+    }
+    50%{
+      transform:rotate(180deg);
+      -webkit-transform:rotate(180deg);      
+    }
+    100%{    
+      transform:rotate(360deg);
+      -webkit-transform:rotate(360deg);
+    }
+}
+.remoney .box .regq{
+  width:1.93rem;
+  height:1.93rem;
+  background:url('http://oslg9bt6h.bkt.clouddn.com/applet/img/cz-img001.png') no-repeat;
+  background-size:100% 100%;
+  animation: anima1 8s linear infinite;
+  -webkit-animation: anima1 8s linear infinite;
+}
+.remoney .box .zs-img{
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+}
+.remoney .box .zs-img .img{
+  width:2rem;
+  height:1.18rem;
+}
+.remoney .box .box-right{
+  position: absolute;
+  right:.05rem;
+  top:.04rem;
+  width:43%;
+  height:.45rem;
+}
+.remoney .box .box-right .text2{
+  color:#6d589d;
+  font-style: italic;
+}
+.remoney .box .box-right .text1{
+  color:#ffffff;
+  font-style: italic;
+}
+.remoney .box .box-bottom{
+  position:absolute;
+  bottom: .20rem;
+  left:0;
+  right:0;
+  height:.45rem; 
+}
+ .remoney .box .box-bottom .money2{
+  font-size:.34rem;
+  color:#ffffff;
+  font-weight: bold;
+}
+.remoney .box .box-bottom .money1{
+  font-size:.34rem;
+  color:#000000;
+  font-weight: bold;
+}
+.reinput{
+  margin-left:.48rem;
+  margin-right:.48rem;
+  height:.74rem;
+  border:.04rem solid #e8e7f5;
+  padding-left:.22rem;
+  padding-right: .22rem;
+  border-radius:.14rem;
+  margin-top:.26rem;
+  background-color: #fff;
+}
+.reinput input{
+  border: none;
+  outline: none;
+  width:100%;
+}
+.rephcolor{
+  color:#cdccce;
+}
+.rexchangetrak{
+  margin-top:.26rem;
+  margin-bottom:.26rem;
+}
+.chosenot{
+  width:.23rem;
+  height:.23rem;
+  border:0.02rem solid #e8e7f5;
+  background-color:#ffffff;
+  border-radius:100%;
+  margin-right:.10rem;
+}
+.choseyes{
+  width:.23rem;
+  height:.23rem;
+  margin-right:.10rem;
+  background: url('http://oslg9bt6h.bkt.clouddn.com/applet/img/cs-icon01.png') no-repeat;
+  background-size: 100% 100%;
+}
+.chosetext{
+  color:#2a2131;
+}
+.rebottombtn{
+  margin-left:.36rem;
+  margin-right:.36rem;
+  height:.85rem;
+  background-color: #7b59e8;
+  border-radius:.50rem;
+  color:#ffffff;
+  font-size:.32rem;
+}

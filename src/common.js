@@ -5,8 +5,8 @@ import { Toast } from 'antd-mobile';
 
 //引入定义的action
 import { user } from './actions/plan.js'
-axios.defaults.baseURL = 'http://192.168.5.184:8019';
-//axios.defaults.baseURL = 'https://api.91war.com';
+//axios.defaults.baseURL = 'http://192.168.5.184:8019';
+axios.defaults.baseURL = 'https://api.91war.com';
 if(localStorage.t){
 	//登录成功后，在加头信息，不认取的有误
 	axios.defaults.headers.common['Authorization'] = localStorage.t;

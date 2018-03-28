@@ -23,6 +23,7 @@ import Detail from './page/detail.js'
 import Lineup from './page/lineup.js'
 import Plan from './page/plan.js'
 import My from './page/my.js'
+import Record from './page/record.js'
 import Edit from './page/edit.js'
 import Ref from './page/ref.js'
 import Detai from './page/detai.js'
@@ -137,6 +138,7 @@ class App extends Component {
                   <Route path="/lineup" component={Lineup}/>
                   <Route path="/plan" component={Plan}/>
                   <Route path="/my" component={My}/>
+                  <Route path="/record" component={Record}/>
                   <Route path="/edit" component={Edit}/>
                   <Route path="/ref" component={Ref}/>
                   <Route path="/test" component={TestRouter}/>
