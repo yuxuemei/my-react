@@ -1,0 +1,124 @@
+.exchangetick{
+	width: 100%;
+	height: 100%;
+}
+.bg{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+.bomb-box{
+  width:5.54rem;
+  height:6rem;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-2.8rem;
+  margin-top:-5rem;
+  z-index: 4;
+}
+.bomb-box .img-close{
+  float: right;
+}
+.bomb-box .line{
+ height: .32rem;
+ width: 0.02rem;
+ float: right;
+ background-color: #fff;
+ margin-right: .30rem;
+}
+.bomb-box .box{
+  width:5.14rem;
+  background-color:#fff;
+  border-radius:.20rem;
+  padding:.50rem .26rem .50rem .26rem;
+  margin-top:.33rem;
+}
+.bomb-box .box .title{
+  color:#2b2031;
+  font-weight:bold;
+  font-size:.26rem;
+}
+.bomb-box .box .proportion{
+  color:#b3251d;
+  font-size:.18rem;
+}
+.bomb-box .box .form{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: .20rem;
+	height:.76rem;
+	line-height:.76rem;
+	margin-bottom: .22rem;
+	position:relative;
+}
+.bomb-box .box .form .box-inpupt{
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border:0.03rem solid #c4c1c5;
+  border-radius:.10rem;
+  width:3.82rem;
+  background-color:#f4f4f4;
+  height:.76rem;
+  line-height:.76rem;
+  padding-left:.20rem;
+  opacity:1;
+  position:absolute;
+  top:0;
+  z-index:10001;
+}
+.bomb-box .box .form .all{
+  background-color: #5d5562;
+  width: .88rem;
+  text-align: center;
+  color: #fff;
+  border-radius:.10rem;
+  margin-left: 4.25rem;
+}
+.bomb-box .box .data{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.bomb-box .box .data span{
+  height: .58rem;
+  line-height: .58rem;
+  margin-right: .20rem;
+  border-radius:0.04rem;
+  border:0.03rem solid #5d5562;
+  font-size: .26rem;
+  font-weight: bold;
+  width: 1.10rem;
+  text-align: center;
+}
+.bomb-box .box .data .selected{
+  color: #fff;
+  background-color: #5d5562;
+}
+.bomb-box .box .surplus{
+  text-align: center;
+  font-size: .20rem;
+  color: #2b2031;
+  margin-top: .30rem;
+  margin-bottom: .30rem;
+}
+.bomb-box .box .opera-btn{
+  height: .76rem;
+  line-height: .76rem;
+  font-size: .26rem;
+  font-weight: bold;
+  background-color: #da5c34;
+  border-radius: .10rem;
+  color: #fff;
+  width: 5.14rem;
+}
+.bomb-box .img-close{
+  width: .54rem;
+  height: .54rem;
+}

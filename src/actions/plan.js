@@ -35,3 +35,11 @@ export function loading(loading){
         loading
 	}
 }
+
+//显示隐藏门票兑换框
+export function exchange(exchange){
+	return {
+        type:types.EXCHANGE,
+        exchange
+	}
+}

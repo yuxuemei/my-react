@@ -3,3 +3,4 @@ export const DELETE = 'DELETE';
 export const SHOW = 'SHOW';
 export const USER = 'USER';
 export const LOADING = 'LOADING';
+export const EXCHANGE = 'EXCHANGE';

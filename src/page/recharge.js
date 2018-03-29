@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Common from './../common.js'
 import Slider from './../Silder/Slider.js';
+import Exchange from './../components/exchange.js'
+import store from '../redux/store.js'
+import { exchange } from '../actions/plan.js'
 
 import './recharge.css'
 
@@ -64,6 +67,10 @@ class Recharge extends Component{
           moneyNum:money
       })
   }
+  openExchange(){
+    var b = this.props.data.exchange;
+    store.dispatch(exchange(!b))
+  }
   render() {
       let user = this.props.data.user;
       let exchangeHtml;
@@ -82,7 +89,7 @@ class Recharge extends Component{
                             <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/cz-icon03.png" alt="cz-icon03"/>
                         </div>
                     </div>
-                    <div className="retop-btn">
+                    <div className="retop-btn" onClick={this.openExchange.bind(this)}>
                         <div style={{marginTop:'0.05rem',color:'#fff'}}>兑换</div>
                     </div>
                 </div>
@@ -122,6 +129,7 @@ class Recharge extends Component{
           <div style={{paddingBottom: '0.30rem'}}>
               <div className="rebottombtn dsajc">立即充值</div>
           </div>
+          <Exchange store={store}/>
         </div>
       )
   }

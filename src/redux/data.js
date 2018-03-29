@@ -2,11 +2,10 @@ import * as types from './../actions/action-type.js'
 import db from './../data/db.js'
 const initialState = {
 	show:false,
-	planlist:db,
-    user:{
-
-    },
-    loading:false,
+	planlist:db, 
+    user:{}, //登录用户信息
+    loading:false, //是否显示loading
+    exchange:false //是否显示门票兑换框
 }
 
 const PlanReducer = function(state = initialState,action){
@@ -26,8 +25,10 @@ const PlanReducer = function(state = initialState,action){
             return Object.assign({},state,{user:action.user});
         case types.LOADING: 
             return Object.assign({},state,{loading:action.loading});
+        case types.EXCHANGE: 
+            return Object.assign({},state,{exchange:action.exchange});
     }
-    return state;
+    return state; 
 }
 
 export default PlanReducer;

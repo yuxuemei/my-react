@@ -1,7 +1,10 @@
 import React,{ Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Footer from './../components/footer.js';
+import Footer from './../components/footer.js'
+import Exchange from './../components/exchange.js'
+import store from '../redux/store.js'
+import { exchange } from '../actions/plan.js'
 import Common from './../common.js'
 import  './my.css'
 class My extends Component {
@@ -28,7 +31,6 @@ class My extends Component {
             honorNumber:[],
             expand:{}, //收益
             expandOld:{}, //收益老接口
-            exchangeTicket:false,
             popupName:false   //转到钻石弹框
         }
 	}
@@ -68,6 +70,10 @@ class My extends Component {
     enterMall(){
         Common.fail("请关注'竞联赛'公众号点击底部菜单'兑换商城'进行兑换");
     }
+    openExchange(){
+        var b = this.props.data.exchange;
+        store.dispatch(exchange(!b))
+    }
 	render(){
         var user = this.props.data.user;
 		return (
@@ -101,7 +107,7 @@ class My extends Component {
                                 <Link to={{pathname:'/record',state:{type:4}}}>
                                     <img className="my-money-icon" style={{marginRight: '.08rem'}} src="http://oslg9bt6h.bkt.clouddn.com/applet/img/my-icon-2.png" alt="my-icon-2"></img>
                                 </Link>
-                                <div className="my-money-number">
+                                <div className="my-money-number" onClick={this.openExchange.bind(this)}>
                                     <div className="number-box">
                                         <span>{Common.formatNumber(user.ticket)}</span>
                                     </div>
@@ -149,7 +155,7 @@ class My extends Component {
                                 {
                                     this.state.honorNumber.map((item,index)=>{
                                         return (
-                                            <div key ={index} className="honor-item" v-for="item in honorNumber"><span>{item}</span></div>
+                                            <div key ={index} className="honor-item"><span>{item}</span></div>
                                         )
                                     })
                                 }
@@ -231,6 +237,7 @@ class My extends Component {
                     </div>
                 </div>
                 <Footer />
+                <Exchange store={store}/>
             </div>
 		)
 	}

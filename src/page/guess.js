@@ -2,40 +2,13 @@ import React,{ Component } from 'react'
 import { connect } from 'react-redux';
 import { PullToRefresh, ListView } from 'antd-mobile';
 
-import './home.css';
-
 import Common from './../common.js'
 import ReactDOM from 'react-dom';
-import Footer from './../components/footer.js';
 
-const data = [
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-    title: 'Meet hotel',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
-    title: 'McDonald\'s invites you',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-  {
-    img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-    title: 'Eat the week',
-    des: '不是所有的兼职汪都需要风吹日晒',
-  },
-];
-const NUM_ROWS = 20;
-let pageIndex = 0;
+import  './guess.css'
 
-function genData(pIndex = 0) {
-    const dataArr = [];
-	for (let i = 0; i < NUM_ROWS; i++) {
-	    dataArr.push(`row - ${(pIndex * NUM_ROWS) + i}`);
-	}
-    return dataArr;
-}
-
+const NUM_ROWS = 5;
+let pageIndex = 1;
 
 class Guess extends Component {
 	constructor(props){
@@ -44,40 +17,45 @@ class Guess extends Component {
 	        rowHasChanged: (row1, row2) => row1 !== row2,
 	    });
         this.state = {
-        	classifys:[],
-        	currentClassifyIndex:0,
+            currency:Common.CURRECY, //货币图标
+        	classifyId:this.props.match.params.id,
+            tags:[],
+        	currentTagIndex:0,
+            tagId:'',
         	dataSource,
 		    refreshing: true,
 		    isLoading: true,
-		    height: document.documentElement.clientHeight
+		    height: document.documentElement.clientHeight,
+            matchList:[],
+            isAll:false,
+
+            isShow:false,
+            showGuessId:'', //当前打开的赛事id
+            gameId:'',
+            isBet:false,
+            guessChildId:'',
+            betteam:'',//之前下注项的名字
 		}
     }
     //组件加载完成
 	componentDidMount() {
-		this.getClassifys();
-	    const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
-	    setTimeout(() => {
-		    this.rData = genData();
-		    this.setState({
-		        dataSource: this.state.dataSource.cloneWithRows(genData()),
-		        height: hei,
-		        refreshing: false,
-		        isLoading: false,
-		    });
-	    }, 1500);
+		this.getTags();
+        this.getGuessList('fresh');
+        var lv =  ReactDOM.findDOMNode(this.lv);
+        var offsetTopHeight = 0;
+        if(lv){
+            offsetTopHeight = lv.offsetTop;
+        }
+	    const hei = this.state.height - offsetTopHeight;
+	    this.setState({
+	        height: hei,
+	    });
 	}
     //下拉刷新
 	onRefresh = () => {
-	    this.setState({ refreshing: true, isLoading: true });
-	    // simulate initial Ajax
-	    setTimeout(() => {
-	      this.rData = genData();
-	      this.setState({
-	        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-	        refreshing: false,
-	        isLoading: false,
-	      });
-	    }, 600);
+        pageIndex = 1;
+        this.getMatchList('fresh');
+	    
 	};
     //滑动到底部
 	onEndReached = (event) => {
@@ -87,16 +65,12 @@ class Guess extends Component {
 	      return;
 	    }
 	    console.log('reach end', event);
-	    this.setState({ isLoading: true });
-	    setTimeout(() => {
-	      this.rData = [...this.rData, ...genData(++pageIndex)];
-	      this.setState({
-	        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-	        isLoading: false,
-	      });
-	    }, 1000);
+        pageIndex++;
+        if(!this.state.isAll){
+            this.getMatchList('end')
+        }
 	};
-	getClassifys(){
+	getTags(){
         Common.get({
             url:'/api/games/sort'
         }).then(respose=>{
@@ -105,28 +79,168 @@ class Guess extends Component {
               title: "全部"
             })
             this.setState({
-            	classifys:respose
+            	tags:respose
             })
         })
 	}
-	serchByClassify(index,id){
+    /*getMatchList(type){
+        Common.get({
+            url:'/apivtwo/activity/lists',
+            data: {
+                page: pageIndex,
+                row: NUM_ROWS,
+                tag_id: this.state.tagId,
+                type_id:38
+            },
+        }).then(respose=>{
+            var list = this.state.matchList;
+            this.setState({
+                matchList:[...list,...respose]
+            })
+            if(pageIndex === 1){
+                //下拉加载
+                if(type === 'fresh'){
+                    if(respose.length>=NUM_ROWS){
+                        this.setState({ refreshing: true, isLoading: true ,isAll:false});
+                        // simulate initial Ajax
+                        setTimeout(() => {
+                          this.rData = this.genData();
+                          this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(this.rData),
+                            refreshing: false,
+                            isLoading: false,
+                          });
+                        }, 1000);
+                    }else{
+                        this.setState({
+                            isAll:true
+                        })
+                    }
+                }
+            }else{
+                //上滑加载
+                if(type === 'end'){
+                    this.setState({ isLoading: true,isAll:false});
+                    setTimeout(() => {
+                        this.rData = [...this.rData, ...this.genData(respose.length)];
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(this.rData),
+                            isLoading: false,
+                        });
+                        //查出来的条数小于row则数据加载完了
+                        if(respose.length<NUM_ROWS){
+                            this.setState({isAll:true})
+                        }else{
+                            this.setState({isAll:false})
+                        }
+                    }, 1000);
+                }
+            }
+        })
+    }*/
+    toggleChild(id){
+        if(this.state.showGuessId == id){
+            this.setState({
+                isShow:!this.isShow
+            })
+        }else{
+            this.setState({
+                isShow:true
+            })
+        }
+        this.setState({
+            showGuessId:id
+        })
+    }
+    getGuessList(type){
+        Common.get({
+            url:'/api/guessinfo/index',
+            data: {
+                page: pageIndex,
+                row: NUM_ROWS
+            },
+        }).then(respose=>{
+            var guessData = [];
+            for(var key in respose){  
+                /*let obj ={};
+                obj.name = key;
+                obj.data = respose[key];*/
+                guessData = respose[key];
+            }  
+            var list = this.state.matchList;
+            this.setState({
+                matchList:[...list,...guessData]
+            })
+            if(pageIndex === 1){
+                //下拉加载
+                if(type === 'fresh'){
+                    if(guessData.length>=NUM_ROWS){ 
+                        this.setState({ refreshing: true, isLoading: true ,isAll:false});
+                        // simulate initial Ajax
+                        setTimeout(() => {
+                            this.rData = this.genData(guessData.length);
+                            console.log(this.rData);
+                            this.setState({
+                                dataSource: this.state.dataSource.cloneWithRows(this.rData),
+                                refreshing: false,
+                                isLoading: false,
+                            });
+                        }, 1000);
+                    }else{
+                        this.setState({
+                            isAll:true
+                        })
+                    }
+                }
+            }else{
+                //上滑加载
+                if(type === 'end'){
+                    this.setState({ isLoading: true,isAll:false});
+                    setTimeout(() => {
+                        this.rData = [...this.rData, ...this.genData(guessData.length)];
+                        this.setState({
+                            dataSource: this.state.dataSource.cloneWithRows(this.rData),
+                            isLoading: false,
+                        });
+                        //查出来的条数小于row则数据加载完了
+                        if(guessData.length<NUM_ROWS){
+                            this.setState({isAll:true})
+                        }else{
+                            this.setState({isAll:false})
+                        }
+                    }, 1000);
+                }
+            }
+        })
+    }
+    genData(item = NUM_ROWS) {
+        const dataArr = [];
+		for (let i = 0; i < item; i++) {
+
+            console.log(`row - ${((pageIndex-1) * item) + i}`);
+		    dataArr.push(`row - ${((pageIndex-1) * item) + i}`);
+		}
+	    return dataArr;
+	}
+	serchByTag(index,id){
 		this.setState({
-			currentClassifyIndex:index
-		})
-        /*this.gameId = id;
-        this.page = 1;
-        this.getGuessList();*/
+			currentTagIndex:index,
+			tagId:id
+		},()=>{
+            pageIndex = 1;
+            this.getMatchList('fresh');
+        })
     }
     renderNav(){
 		var state = this.state;
 		return (
-		    <div className="nav fixed">
+		    <div className="nav fixed text-left">
 		    {
-		    	state.classifys.map((classify,index)=>{
+		    	state.tags.map((tag,index)=>{
                     return (
-                        <div key={index} className={state.currentClassifyIndex === index?'act':''} onClick={this.serchByClassify.bind(index,index,classify.game_id)}>
-					    	<span className="nav-title">{classify.title}</span>
-					    	<div className={`absolute ${state.currentClassifyIndex === index ? 'border' : ''}`}></div>
+                        <div key={index} className={state.currentTagIndex === index?'act':''} onClick={this.serchByTag.bind(this,index,tag.id)}>
+					    	<span className="nav-title">{tag.title}</span>
+					    	<div className={`absolute ${state.currentTagIndex === index ? 'border' : ''}`}></div>
 					    </div>
                     )
                 })
@@ -134,34 +248,80 @@ class Guess extends Component {
 		    </div>
 		)
 	}
+    renderBottomBar(){
+        if(this.state.isLoading && !this.state.isAll && pageIndex !== 1){
+            return (<img className="loading-gif" src={require('./../images/loading.gif')} alt="loading-gif"/>)
+        }else if(!this.state.isLoading && this.state.isAll){
+            return (<span style={{fontSize: '0.22rem', color: 'rgb(142, 148, 183)'}}>没有更多数据了</span>)
+        }
+    }
+    renderContainer(row){
+        if(this.state.matchList.length === 0){
+            return(
+                <div>
+                <div className="default">
+                    <img src="http://oslg9bt6h.bkt.clouddn.com/applet/img/default.png" alt="default"></img>
+                </div>
+                <div className="default-text center">这里暂时还没有比赛</div>
+            </div>
+            )
+        }else{
+            return(
+                <ListView className="list" key="1" ref={el => this.lv = el} dataSource={this.state.dataSource} 
+                    renderFooter={() => (<span> {this.renderBottomBar()} </span>)}
+                    renderRow={row} style={{height: this.state.height}}
+                    pullToRefresh={<PullToRefresh refreshing={this.state.refreshing} onRefresh={this.onRefresh} />} onEndReached={this.onEndReached}  pageSize={5}  />
+            )
+        }
+    }
+    renderStatus(status){
+        if(status == 0){
+            return(<span className="status status-highlight">未开始</span>);
+        }else if(status == 1){
+            return(<span className="status status-highlight">可预测</span>);
+        }else if(status == 2){
+            return(<span className="status status-grey">已封盘</span>);
+        }else if(status == 3){
+            return(<span className="status status-grey">已结算</span>);
+        }
+    }
     render() {
-	    let index = data.length - 1;
+        var match = this.state.matchList;
+	    let index = match.length - 1;
 	    const row = (rowData, sectionID, rowID) => {
-	      if (index < 0) {
-	        index = data.length - 1;
-	      }
-	      const obj = data[index--];
-	      return (
-	        <div key={rowID} style={{ padding: '0 15px',  backgroundColor: 'white'}} >
-	            <div style={{ height: '50px', lineHeight: '50px', color: '#888', fontSize: '18px', borderBottom: '1px solid #ddd' }}>{obj.title}</div>
-		        <div style={{ display: 'flex', padding: '15px' }}>
-		            <img style={{ height: '63px', width: '63px', marginRight: '15px' }} src={obj.img} alt="img" />
-		            <div>
-		              <div style={{ marginBottom: '8px', color: '#000', fontSize: '16px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '250px' }}>{obj.des}-{rowData}</div>
-		              <div style={{ fontSize: '16px' }}><span style={{ fontSize: '30px', color: '#FF6E27' }}>{rowID}</span> 元/任务</div>
-		            </div>
-	            </div>
-	        </div>
-	      )
-	    };
+		    if (index < 0) {
+		        index = match.length - 1;
+		    }
+	        const obj = match[index--];
+            return (
+                <div key={rowID}>
+                    <div className="apply" style={obj.is_join==1?{}:{display:'none'}}>已参加</div>
+                    <div className="big-item" onClick={this.toggleChild.bind(this,obj.id)}>
+                        <div className="center" style={{flex:'1',fontSize:'.22rem'}}>
+                            <img className="player_logo" alt="player_logo" src={obj.player[0].logo || Common.IMG_DEFAULT} />
+                            <div className="player_name">{obj.player[0].player_name}</div>
+                        </div>
+                        <div className="info center">
+                            <div className="title"><span>{obj.title}</span></div>
+                            <div className="result-info">
+                                <span className="result" style={obj.objing_status == 3?{}:{display:'none'}}>{obj.player[0].score}</span>
+                                {this.renderStatus(obj.objing_status)}
+                                <span className="result" style={obj.objing_status == 3?{}:{display:'none'}}>{obj.player[1].score}</span>
+                            </div>
+                            <div className="time-text"><img src={require('./../images/time.jpg')} className="icon-time" />{Common.formatDate(obj.end_time,"MM-dd hh:mm")}</div>
+                        </div>
+                        <div className="center" style={{flex:'1',fontSize:'.22rem'}}>
+                            <img className="player_logo" src={obj.player[1].logo || Common.IMG_DEFAULT} />
+                            <div className="player_name" >{obj.player[1].player_name}</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        } 
 	    return (
-	    	<div  className="guess">
-	    	  {this.renderNav()}
-		      <ListView key="1" ref={el => this.lv = el} dataSource={this.state.dataSource} renderHeader={() => <span>Pull to refresh</span>} 
-		      renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}> {this.state.isLoading ? 'Loading...' : 'Loaded'} </div>)}
-		        renderRow={row} style={{height: this.state.height,border: '1px solid #ddd',margin: '5px 0'}}
-		        pullToRefresh={<PullToRefresh refreshing={this.state.refreshing} onRefresh={this.onRefresh} />} onEndReached={this.onEndReached}  pageSize={5}  />
-		        <Footer />
+	    	<div  className="match">
+	    	    {this.renderNav()}
+                {this.renderContainer(row)}
 		    </div>
 	    );
 	}
