@@ -5,7 +5,8 @@ const initialState = {
 	planlist:db, 
     user:{}, //登录用户信息
     loading:false, //是否显示loading
-    exchange:false //是否显示门票兑换框
+    exchange:false, //是否显示门票兑换框
+    bet:false //是否显示下注框
 }
 
 const PlanReducer = function(state = initialState,action){
@@ -27,6 +28,8 @@ const PlanReducer = function(state = initialState,action){
             return Object.assign({},state,{loading:action.loading});
         case types.EXCHANGE: 
             return Object.assign({},state,{exchange:action.exchange});
+        case types.BET: 
+            return Object.assign({},state,{bet:action.bet});
     }
     return state; 
 }

@@ -43,3 +43,11 @@ export function exchange(exchange){
         exchange
 	}
 }
+
+//显示隐藏下注，追加框
+export function bet(bet){
+	return {
+        type:types.BET,
+        bet
+	}
+}

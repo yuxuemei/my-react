@@ -4,3 +4,4 @@ export const SHOW = 'SHOW';
 export const USER = 'USER';
 export const LOADING = 'LOADING';
 export const EXCHANGE = 'EXCHANGE';
+export const BET = 'BET';

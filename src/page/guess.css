@@ -1,8 +1,8 @@
-.guessList{
+.guess-list{
   padding-top: .8rem;
   padding-bottom:1rem;
 }
-.guessList .am-list{
+.guess-list .am-list{
    padding-bottom: 1rem;
 }
 .big-item{
