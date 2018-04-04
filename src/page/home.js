@@ -58,6 +58,7 @@ class Home extends Component {
             this.setState({
 				gameClassify:respose
 			})
+			//去掉loading
 			store.dispatch(loading(!this.props.data.loading));
         })
     }

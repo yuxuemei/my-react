@@ -313,7 +313,7 @@ class Guess extends Component {
         }
     }
     renderChildGuess(guess){
-        if(this.state.isShow && this.state.showGuessId == guess.id){
+        if(this.state.isShow && this.state.showGuessId === guess.id){
             return(
                 <div className="item-small">
                 {
@@ -355,7 +355,7 @@ class Guess extends Component {
                     <div className="apply" style={obj.is_join===1?{}:{display:'none'}}>已参加</div>
                     <div className="big-item" onClick={this.toggleChild.bind(this,obj.id)}>
                         <div className="center" style={{flex:'1',fontSize:'.22rem'}}>
-                            <img className="player_logo" alt="player_logo" src={obj.player[0].logo || Common.IMG_DEFAULT} alt="player_logo"/>
+                            <img className="player_logo" alt="player_logo" src={obj.player[0].logo || Common.IMG_DEFAULT}/>
                             <div className="player_name">{obj.player[0].player_name}</div>
                         </div>
                         <div className="info center">
@@ -368,7 +368,7 @@ class Guess extends Component {
                             <div className="time-text"><img src={require('./../images/time.jpg')} className="icon-time" alt="time" />{Common.formatDate(obj.end_time,"MM-dd hh:mm")}</div>
                         </div>
                         <div className="center" style={{flex:'1',fontSize:'.22rem'}}>
-                            <img className="player_logo" src={obj.player[1].logo || Common.IMG_DEFAULT} />
+                            <img className="player_logo" src={obj.player[1].logo || Common.IMG_DEFAULT} alt="logo"/>
                             <div className="player_name" >{obj.player[1].player_name}</div>
                         </div>
                     </div>
