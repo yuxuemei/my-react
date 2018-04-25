@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom'
 
 import  './interaction.css'
 
-const NUM_ROWS = 5;
-let pageIndex = 1;
+let [NUM_ROWS,pageIndex] = [5,1];
 
 class Interaction extends Component {
 	constructor(props){
@@ -34,7 +33,7 @@ class Interaction extends Component {
     //组件加载完成
 	componentDidMount() {
 		this.getTags();
-        this.getMatchList('fresh');
+        this.getMatchList();
         var lv =  ReactDOM.findDOMNode(this.lv);
         var offsetTopHeight = 0;
         if(lv){
@@ -48,7 +47,7 @@ class Interaction extends Component {
     //下拉刷新
 	onRefresh = () => {
         pageIndex = 1;
-        this.getMatchList('fresh');
+        this.getMatchList();
 	    
 	};
     //滑动到底部
@@ -77,7 +76,7 @@ class Interaction extends Component {
             })
         })
 	}
-    getMatchList(type){
+    getMatchList(type='fresh'){
         Common.get({
             url:'/apivtwo/activity/lists',
             data: {
@@ -88,10 +87,10 @@ class Interaction extends Component {
             },
         }).then(respose=>{
             var list = this.state.matchList;
-            this.setState({
-                matchList:[...list,...respose]
-            })
             if(pageIndex === 1){
+                this.setState({
+                    matchList:respose
+                })
                 //下拉加载
                 if(type === 'fresh'){
                     if(respose.length>=NUM_ROWS){
@@ -112,6 +111,9 @@ class Interaction extends Component {
                     }
                 }
             }else{
+                this.setState({
+                    matchList:[...list,...respose]
+                })
                 //上滑加载
                 if(type === 'end'){
                     this.setState({ isLoading: true,isAll:false});
@@ -145,7 +147,7 @@ class Interaction extends Component {
 			tagId:id
 		},()=>{
             pageIndex = 1;
-            this.getMatchList('fresh');
+            this.getMatchList();
         })
     }
     renderNav(){

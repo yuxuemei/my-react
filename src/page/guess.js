@@ -43,7 +43,7 @@ class Guess extends Component {
     //组件加载完成
 	componentDidMount() {
 		this.getTags();
-        this.getGuessList('fresh');
+        this.getGuessList();
         var lv =  ReactDOM.findDOMNode(this.lv);
         var offsetTopHeight = 0;
         if(lv){
@@ -57,7 +57,7 @@ class Guess extends Component {
     //下拉刷新
 	onRefresh = () => {
         pageIndex = 1;
-        this.getGuessList('fresh');
+        this.getGuessList();
 	    
 	};
     //滑动到底部
@@ -89,13 +89,11 @@ class Guess extends Component {
     toggleChild(id){
         console.log('showGuessId==',this.state.showGuessId,'当前id==',id,'是否显示==',this.state.isShow)
         if(this.state.showGuessId === id){
-            console.log('切换');
             this.setState({
                 isShow:!this.state.isShow,
                 showGuessId:id
             })
         }else{
-            console.log('xianshi');
             this.setState({
                 isShow:true,
                 showGuessId:id
@@ -103,7 +101,7 @@ class Guess extends Component {
         }
         console.log('showGuessId==',this.state.showGuessId,'当前id==',id,'是否显示==',this.state.isShow)
     }
-    getGuessList(type){
+    getGuessList(type="fresh"){
         Common.get({
             url:'/api/guessinfo/index',
             data: {
@@ -176,7 +174,7 @@ class Guess extends Component {
 			tagId:id
 		},()=>{
             pageIndex = 1;
-            this.getGuessList('fresh');
+            this.getGuessList();
         })
     }
     //下注，追加
