@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 class Child extends Component {
   constructor(props){
-    console.log("child");
-    console.log(props);
      super(props);
      this.state = {
         name:'孩子'
