@@ -11,25 +11,25 @@ import './components/component.css';
 import 'antd-mobile/dist/antd-mobile.css';
 
 // 引入模块页面
-import Home from './page/home.js';
-import Guess from './page/guess.js';
-import Interaction from './page/interaction.js';
-import Detail from './page/detail.js';
-import Lineup from './page/lineup.js';
-import Plan from './page/plan.js';
-import My from './page/my.js';
-import Record from './page/record.js';
-import Edit from './page/edit.js';
-import Ref from './page/ref.js';
-import Detai from './page/detai.js';
-import Login from './page/login.js';
-import Recharge from './page/recharge.js';
+import Home from './page/home.js'
+import Guess from './page/guess.js'
+import Interaction from './page/interaction.js'
+import Detail from './page/detail.js'
+import Lineup from './page/lineup.js'
+import Plan from './page/plan.js'
+import My from './page/my.js'
+import Record from './page/record.js'
+import Edit from './page/edit.js'
+import Ref from './page/ref.js'
+import Detai from './page/detai.js'
+import Login from './page/login.js'
+import Recharge from './page/recharge.js'
 // 引入组件
-import Loading from './components/loading.js';
-import Popup from './components/popup.js';
-import TestRouter from './components/testrouter.js';
+import Loading from './components/loading.js'
+import Popup from './components/popup.js'
+import TestRouter from './components/testrouter.js'
 //引入路由
-import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createBrowserHistory'
 const history = createHistory();
 
 class App extends Component {
