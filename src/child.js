@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 class Child extends Component {
   constructor(props){
-    console.log("child");
-    console.log(props);
      super(props);
      this.state = {
         name:'孩子'
@@ -11,11 +9,8 @@ class Child extends Component {
   }
   //组件加载完成
   componentDidMount(){
-    console.log('componentDidMount === '+this.props.parent);
-    /*this.setState({
-      name:'yuxuemei'
-    })*/
   }
+  
   render() {
     return (
       <div className="child">
