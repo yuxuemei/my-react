@@ -176,6 +176,7 @@ class Bet extends Component{
         this.guessBetRequest(type);
       }
   }
+  
   autoExchangeTicket(diamond,callback){
       Common.post({
           url: '/api/currency/exchang',
@@ -189,6 +190,7 @@ class Bet extends Component{
               callback();
         })
   }
+
   //竞猜下注提交
   guessBetRequest(type){
       if(parseInt(this.state.betNumber,10) > 0){
@@ -240,9 +242,11 @@ class Bet extends Component{
            return(<span>水晶)</span>);
       }
   }
+
   checkHandle(){
 
   }
+
   render() {
     let buttonHtml;
     if(!this.state.isRecharge && this.state.guessObj.total_gold === 0){
