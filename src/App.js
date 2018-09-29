@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Router,Route } from 'react-router-dom'
-//import logo from './logo.svg';
-//import Child from './child';
-//import ToggleButton  from './toggleButton';
-//import Boo  from './boo';
-//import Foo  from './foo';
+import { Router,Route } from 'react-router-dom';
 
 //引入store
 import { Provider } from 'react-redux';
-import store from './redux/store.js'
+import store from './redux/store.js';
 
 // 引入样式文件
-import './App.css'
-import './components/component.css'
+import './App.css';
+import './components/component.css';
 import 'antd-mobile/dist/antd-mobile.css';
 
 // 引入模块页面
